@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="../equipment-checkout/fontawesome-free-6.6.0-web/css/all.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <title>SVHS VT Checkout</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <script defer src="app1.js"></script>
+</head>
+<body>
+    <div class="container1">
+        <div class="navbar">
+            <div class="vtbanner">
+                <img class="vtlogopic" src="itempics/SmokyValley.png" alt="VT logo">
+                <div class="vttitle">
+                    <h2 class="maintitle">Smoky Valley Vision_Tek</h2>
+                    <h3 class="secondarytitle">Equipment Checkout</h3>
+                </div>
+            </div> 
+            <div class="navlinks">
+                <div class="cameraaccnavlink">
+                    <!-- camera page link -->
+                    <a href="index.html">
+                        <button class="linkbutton">
+                            <p class="reformatlinktext">
+                                Cameras
+                            </p>
+                        </button>
+                    </a>
+                </div>
+                <div class="cameranavlink">
+                    <!-- camera page link -->
+                    <a href="cameraaccessorys.html">
+                        <button class="linkbutton">
+                            <p class="reformatlinktext">
+                                Camera Accessories
+                            </p>
+                        </button>
+                    </a>
+                </div>
+                <div class="miscnavlink">
+                    <!-- placeholder link page link -->
+                    <a href="miscellaneous.html">
+                        <button class="linkbutton">
+                            <p class="reformatlinktext">
+                                Miscellaneous
+                            </p>
+                        </button>
+                    </a>
+                </div>
+                <div class="placeholderlinks">
+                    <!-- placeholder link page link -->
+                    <div>
+                        <button class="linkbutton">
+                            <p class="reformatlinktext">
+                                
+                            </p>
+                        </button>
+                    </div>
+                </div>
+                <div class="shvslink">
+                        <a href="https://www.smokyvalley.org/o/svhs" target="_blank">
+                            <button class="linkbutton">
+                                <p class="reformatlinktext">
+                                    Smoky Valley Homepage
+                                </p>
+                            </button>
+                        </a>
+                </div>
+            </div>
+        </div>
+        <div class="equipcheckoutcont">  <!--where all the html created in js go-->
+
+        </div>
+        <div class="footer">
+                <div class="footerinfo">
+                    <h4>12/4/2024 Atticus Pavlovich, Zach Vogel</h4>
+                </div>  
+        </div>
+    </div>
+    <div id="popup" class="popup hide">
+        <div class="popup-content" id="popup-content">
+          
+          <!-- Grid container inside the popup -->
+          <div class="iteminfocont">
+            <div class="itembox">
+                <div class="itemtitle">
+                    <h2 class="nomargitopbottom" id="formtitle">
+                    </h2>
+                    <h4 class="nomargitopbottom" id="formcategory">
+                    </h4>
+                </div>
+                <div class="itemtextbox">
+                    <div class="itemdescription">
+                        <h4>Items Included:</h4>
+                        <p id="formdescription">
+
+                        </p>
+                        <br>
+                        <h4>SD card Checkout</h4>
+                        <div class="dropdown">
+                            <button class="dropbtn">Select Option</button>
+                            <div class="dropdown-content" id="dropdownholder">
+                              <!-- SD card options -->
+                              
+                            </div>
+                        </div>
+                        
+                        <!-- Hidden input to store the selected SD card -->
+                        <input type="hidden" id="selectedSDCard" required>
+    
+                        <br>
+                        <div class="selected-option">
+                            <p id="display-selection">You selected: None</p>
+                        </div>
+                        <br>
+                        <!-- Email field -->
+                        <form id="checkoutForm">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+    
+                            <br><br>
+    
+                            <!-- Name field -->
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" placeholder="Enter full name" required>
+                            <br><br>
+    
+                            <!-- Checkout button -->
+                            <button type="button" class="checkoutbutton" onclick="validateCheckout()">Check out</button>
+                        </form>
+                        <button onclick="closePopup()" class="close">Close</button>
+                          
+                    </div>
+                </div>    
+                <div class="itempicture">
+                    <img class="image2" id="formitempic" src="" alt="item image">
+                </div>
+                
+            </div> 
+        </div>
+        </div>
+    </div>
+</body>
+</html>
