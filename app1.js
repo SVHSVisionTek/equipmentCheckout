@@ -7,9 +7,16 @@ let formitempic = document.getElementById('formitempic');
 let selectedEquipment;
 
 
+idk()
 
-
-
+function idk()
+{
+    setTimeout(function()
+{
+    let loader = document.getElementById('loader')
+                loader.remove()
+}, 1000)
+}
 
 
 
@@ -29,6 +36,8 @@ fetch(url)
             const card = sheetData[i];
             if (card.category === "Camera")
             {
+                let loader = document.getElementById('loader')
+                classList.add('hide')
 
                 // html in javascript starts
                 // create div

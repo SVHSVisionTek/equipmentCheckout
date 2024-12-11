@@ -2,6 +2,7 @@
 Web site - #f47e2b
 flame - #ec8a29
 */
+
 body
 {
     margin: 0;
@@ -412,24 +413,24 @@ a
 p
 {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Noto Sans", sans-serif;
     
 }
 h3
 {
     margin-bottom: 5px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Noto Sans", sans-serif;
     font-weight: bold;
 }
 h4
 {
     margin-bottom: 5px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Noto Sans", sans-serif;
     font-weight: bold;
 }
 h2
 {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Noto Sans", sans-serif;
     font-weight: bold;
 }
 .itembutton1
@@ -565,7 +566,7 @@ h2
 }
 form
 {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Noto Sans", sans-serif;
 }
 .bgcolorgray
 {
@@ -593,7 +594,7 @@ form
     justify-content: center;
     text-align: center;
     align-self: center;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Noto Sans", sans-serif;
 }
 .close:hover
 {
@@ -642,3 +643,26 @@ form
     background: white;
     border: black 3px;
 }
+
+.loader{
+    margin: 0 0 2em;
+    height: 100px;
+    width: 20%;
+    text-align: center;
+    padding: 1em;
+    margin: 0 auto 1em;
+    display: inline-block;
+    vertical-align: top;
+    grid-column: 1 / -1;
+    grid-row: span 1;
+    justify-content: center;
+
+  }
+  
+  /*
+    Set the color of the icon
+  */
+  svg path,
+  svg rect{
+    fill: #FF6700;
+  }
