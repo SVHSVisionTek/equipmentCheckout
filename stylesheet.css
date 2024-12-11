@@ -2,7 +2,10 @@
 Web site - #f47e2b
 flame - #ec8a29
 */
-
+:root {
+    --website-color: #f47e2b;
+    --flame-color: #ec8a29;
+}
 body
 {
     margin: 0;
