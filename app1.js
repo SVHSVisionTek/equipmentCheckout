@@ -174,7 +174,7 @@ fetch(url)
         }
     } else {
         console.error('sheet1 property is undefined');
-        alert('Ran out of free sheetly uses, wait a week and try again')
+        alert('Ran out of free sheetly uses. Please see Mr. Vogel.')
     }
 })
 .catch(error => console.error('Error:', error)); // Optional: Add error handling
