@@ -14,6 +14,9 @@ fetch(url)
     const sheetData = json.sheet1; // Adjust this line after inspecting the JSON structure
     
     if (sheetData) {
+        let loader = document.getElementById('loader');
+        loader.remove();
+        
         const container = document.querySelector('.equipcheckoutcont');
         // Loop through the JSON data and write HTML elements
         for (let i = 0; i < sheetData.length; i++) {

@@ -7,19 +7,13 @@ let formitempic = document.getElementById('formitempic');
 let selectedEquipment;
 
 
-idk()
 
-function idk()
-{
-    setTimeout(function()
-{
-    let loader = document.getElementById('loader')
-                loader.remove()
-}, 1000)
-}
+// get year for footer
 
-
-
+let copydate = document.getElementById('footercopyrightdate');
+const d = new Date();
+let year = d.getFullYear();
+copydate.innerHTML = `©Vision_Tek ${year}`;
 
 
 let url = 'https://api.sheety.co/8ec23e810fa3efa81389bcea9a3c14a5/checkoutInventory/sheet1';
@@ -30,20 +24,21 @@ fetch(url)
     const sheetData = json.sheet1; // Adjust this line after inspecting the JSON structure
     
     if (sheetData) {
+        let loader = document.getElementById('loader');
+        loader.remove();
         const container = document.querySelector('.equipcheckoutcont');
         // Loop through the JSON data and write HTML elements
         for (let i = 0; i < sheetData.length; i++) {
             const card = sheetData[i];
             if (card.category === "Camera")
             {
-                let loader = document.getElementById('loader')
-                classList.add('hide')
+                
 
                 // html in javascript starts
                 // create div
             const box = document.createElement('div'); 
             // create classes for div
-            box.classList.add('itemcheckout', 'bgcolorwhite');
+            box.classList.add('itemcheckout', 'bgcolorwhite', 'slide-up');
 
             // itemimage div
                 const itemimage = document.createElement('div');
@@ -94,7 +89,6 @@ fetch(url)
                     // creating the checkout link
                     let addtocart = document.createElement('button');
                     addtocart.id = card.number;
-                    console.log(card.number)
                     addtocart.classList.add('addtocart1');
                     addtocart.addEventListener('click', function(){openPopup()}); // Attach the function as a click event listener
                 
@@ -194,7 +188,7 @@ const selectedSDCardInput = document.getElementById('selectedSDCard');
 
         fetch(url)
         .then((response) => response.json())
-        .then(json => {
+         .then(json => {
             const sheetData = json.sheet1; // Access the data array
 
             // Loop through the data to find "Camera Kit 1"
@@ -314,3 +308,17 @@ function validateCheckout() {
         .catch(error => console.error('Error fetching data:', error));
     
 }
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entries) => {
+        console.log(entries)
+        if (entries.isIntersecting) {
+            entry.target.classList.add('show');
+        }
+        else{
+            entry.target.classList.remove('show')
+        }
+    })
+})
+
+const scrollanimation = document.querySelectorAll('.itemcheckout');
+scrollanimation.forEach((el) => observer.observe(el))
