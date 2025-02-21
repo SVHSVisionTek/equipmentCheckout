@@ -5,51 +5,208 @@ flame - #ec8a29
 
 body
 {
+    background: #FDF7FA;
     margin: 0;
     padding: 0;
     /* background-image: url('https://i.pinimg.com/originals/70/94/c0/7094c069d31d621bb8de4c3318bd72a9.jpg'); */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-
 }
+
+  .wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    filter: blur(40px);
+    z-index: -10;
+  }
+
+  .gradient {
+    position: absolute;
+    border-radius: 100%;
+    opacity: 0.7;
+    mix-blend-mode: screen;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(0.1, 0, 0.9, 1);
+  }
+
+  
+.gradient-1 {
+background: rgb(244, 126, 43) none repeat scroll 0% 0% / auto padding-box border-box;
+width: 700px;
+height: 700px;
+animation-duration: 20s;
+opacity: 1;
+left: 60%;
+top: 40%;
+z-index: -2;
+animation-name: animation-gradient-1;
+}
+.gradient-2 {
+background: rgb(170, 88, 30) none repeat scroll 0% 0% / auto padding-box border-box;
+width: 600px;
+height: 600px;
+animation-duration: 20s;
+opacity: 0.6;
+left: 40%;
+top: 60%;
+z-index: -1;
+animation-name: animation-gradient-2;
+}
+.gradient-3 {
+background: rgb(247, 164, 106) none repeat scroll 0% 0% / auto padding-box border-box;
+width: 500px;
+height: 500px;
+animation-duration: 20s;
+opacity: 0.6;
+left: 50%;
+top: 50%;
+z-index: -3;
+animation-name: animation-gradient-3;
+}
+
+  @keyframes animation-gradient-1 {
+    0% {
+      transform: translateY(-50%) translateX(-50%) rotate(-20deg) translateX(20%);
+    }
+    25% {
+      transform: translateY(-50%) translateX(-50%) skew(-15deg, -15deg)
+        rotate(80deg) translateX(30%);
+    }
+    50% {
+      transform: translateY(-50%) translateX(-50%) rotate(180deg) translateX(25%);
+    }
+    75% {
+      transform: translateY(-50%) translateX(-50%) skew(15deg, 15deg)
+        rotate(240deg) translateX(15%);
+    }
+    100% {
+      transform: translateY(-50%) translateX(-50%) rotate(340deg) translateX(20%);
+    }
+  }
+  
+  @keyframes animation-gradient-2 {
+    0% {
+      transform: translateY(-50%) translateX(-50%) rotate(40deg) translateX(-20%);
+    }
+    25% {
+      transform: translateY(-50%) translateX(-50%) skew(15deg, 15deg)
+        rotate(110deg) translateX(-5%);
+    }
+    50% {
+      transform: translateY(-50%) translateX(-50%) rotate(210deg) translateX(-35%);
+    }
+    75% {
+      transform: translateY(-50%) translateX(-50%) skew(-15deg, -15deg)
+        rotate(300deg) translateX(-10%);
+    }
+    100% {
+      transform: translateY(-50%) translateX(-50%) rotate(400deg) translateX(-20%);
+    }
+  }
+  
+  @keyframes animation-gradient-3 {
+    0% {
+      transform: translateY(-50%) translateX(-50%) translateX(-15%)
+        translateY(10%);
+    }
+    20% {
+      transform: translateY(-50%) translateX(-50%) translateX(20%)
+        translateY(-30%);
+    }
+    40% {
+      transform: translateY(-50%) translateX(-50%) translateX(-25%)
+        translateY(-15%);
+    }
+    60% {
+      transform: translateY(-50%) translateX(-50%) translateX(30%) translateY(20%);
+    }
+    80% {
+      transform: translateY(-50%) translateX(-50%) translateX(5%) translateY(35%);
+    }
+    100% {
+      transform: translateY(-50%) translateX(-50%) translateX(-15%)
+        translateY(10%);
+    }
+  }
 .container1
 {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(10, 75px);
+    grid-template-rows: repeat(11, 65px);
 }
 .container2
 {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(10, 75px);
+    grid-template-rows: repeat(10, 65px);
 }
 .container3
 {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(10, 75px);
+    grid-template-rows: repeat(10, 65px);
 }
-.navbar
-{
+.navbar {
     grid-column: span 12;
-    grid-row: span 2;
+    grid-row: span 4; /* Keep this if the structure depends on 4 rows */
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(2, 1fr); 
-    background-color: #f47e2b;
-}
-.footer
-{
-    grid-column: span 12;
-    grid-row: span 2;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    margin-top: 35px;
-    background: #FDF7FA;
+    grid-template-rows: repeat(3, 1fr);
+    position: relative;
 }
 
+.navbar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(2 * (100% / 3)); /* Covers 2 out of 3 rows */
+    background-color: #FDF7FA;
+    z-index: -1; /* Sends it behind the content */
+}
+.footer {
+    grid-column: span 12;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #2C2C2C;
+    color: #FDF7FA;
+    padding: 20px;
+    height: auto;
+    text-align: center;
+    --mask:
+    radial-gradient(67.08px at 50% 90px,#000 99%,#0000 101%) calc(50% - 60px) 0/120px 100%,
+    radial-gradient(67.08px at 50% -60px,#0000 99%,#000 101%) 50% 30px/120px 100% repeat-x;
+  -webkit-mask: var(--mask);
+          mask: var(--mask);
+          padding-top: 50px;
+}
+
+.footerinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.fa-brands {
+    font-size: 35px;
+    color: #f47e2b;
+    transition: transform 0.4s cubic-bezier(0.75, 2, 0.75, 1), color 0.3s;
+    display: inline-block;  /* Ensures it behaves properly */
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.fa-brands:hover {
+    color: #FFD700;
+    transform: scale(1.2);
+}
 .vtbanner
 {
     grid-column: span 12;
@@ -57,15 +214,8 @@ body
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(1, 100px);
-    background: #FDF7FA;
-}
-.footerinfo
-{
-    grid-column: span 12;
-    grid-row: span 1;
-    display: flex;
-    place-content: center;
-    padding-bottom: 10px;
+    background-color: #FDF7FA;
+
 }
 .vtlogopic
 {
@@ -89,9 +239,22 @@ body
 .navlinks
 {
     grid-column: span 12;
+    grid-row: span 2;
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: repeat(6, 1fr);
+    background-color: #e06f26;
+
+}
+.waves
+{
+    --mask:
+    radial-gradient(78.26px at 50% 105px,#000 99%,#0000 101%) calc(50% - 70px) 0/140px 51% repeat-x,
+    radial-gradient(78.26px at 50% -70px,#0000 99%,#000 101%) 50% 35px/140px calc(51% - 35px) repeat-x,
+    radial-gradient(78.26px at 50% calc(100% - 105px),#000 99%,#0000 101%) 50% 100%/140px 51% repeat-x,
+    radial-gradient(78.26px at 50% calc(100% + 70px),#0000 99%,#000 101%) calc(50% - 70px) calc(100% - 35px)/140px calc(51% - 35px) repeat-x;
+  -webkit-mask: var(--mask);
+          mask: var(--mask);
 }
 .placeholderlinks
 {
@@ -139,12 +302,14 @@ button
     text-align: center;
     width: 100%;
     height: 100%;
-    transition: background-color 0.5s 100ms;
+    transition: background-color 1s 100ms;
+    transition: transform 0.4s cubic-bezier(0.75, 2, 0.75, 1);
 }
-.linkbutton:hover
-{
-    background-color: #e06f26;
+.linkbutton:hover {
+    transform: scale(1.2); /* Slightly enlarges */
 }
+
+
 .reformatlinktext
 {
     margin: 0;
@@ -163,10 +328,26 @@ a
 }
 
 .itemcheckout {
+    background-color: white;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(10, 1fr);
-    border: 3px black solid;
+    overflow: hidden;
+    padding: 25px;
+    padding-bottom: 0px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.blob1
+{
+    border-radius: 26% 74% 22% 78% / 54% 21% 79% 46%;
+}
+.blob2
+{
+    border-radius: 48% 52% 23% 77% / 70% 66% 34% 30%;
+}
+.blob3
+{
+    border-radius: 91% 9% 72% 28% / 15% 52% 48% 85%;
 }
 
 /* Positioning each item based on its order */
@@ -239,7 +420,6 @@ a
             display: grid;
             grid-template-columns: repeat(8, 1fr);
             grid-template-rows: repeat(10, 1fr);
-            border: 3px black solid;
         }
 
         /* Positioning each item based on its order */
@@ -319,7 +499,6 @@ a
                 display: grid;
                 grid-template-columns: repeat(8, 1fr);
                 grid-template-rows: repeat(10, 1fr);
-                border: 3px black solid;
             }
             
             /* Positioning each item in a single column */
@@ -367,15 +546,11 @@ a
 
 
 
-.bgcolorwhite
-{
-    background-color: snow;
-}
 .itemimage1
 {
     display: flex;
     grid-column: span 8;
-    grid-row: span 7;
+    grid-row: span 6;
     align-self: center;
     justify-content: center;
     
@@ -390,17 +565,19 @@ a
 {
     width: 75%;
     height: auto;
-    overflow: hidden;
+    overflow: hidden; 
 }
 .itembanner1
 {
+    text-align: center;
     grid-column: span 8;
-    grid-row: span 3;
+    grid-row: span 4;
+    width: auto;
+    height: auto;
     background-color: #ec8a29;
-    border-top: 3px solid black;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
+    border-radius: 98% 66% 63% 0% / 43% 72% 0% 10% ;
+    padding-top: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .itemtitle1
 {
@@ -449,20 +626,22 @@ h2
 {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: repeat(5, 100px);
+    grid-template-rows: repeat(10, 60px);
 }
 .itembox
 {
-    grid-column: span 10;
+    grid-column: 3 / span 6;
     grid-row: span 10;
-    background-color: snow;
-    border: black solid 3px;
+    background: rgba(255, 255, 255, 0.11);
+    backdrop-filter: blur(15px);
+    border: 3px solid rgba(255, 255, 255, 0.3);
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(6, 1fr);
 }
 .itemtitle
 {
+    z-index: 2;
     margin-left: 15px;
     align-self: center;
     grid-column: span 6;
@@ -474,88 +653,85 @@ h2
 }
 .itemtextbox
 {
-    grid-column: span 3;
-    grid-row: span 5;
+    grid-column: 2 / span 4;
+    grid-row: span 10;
 }
 .itemdescription
 {
     margin-left: 15px;
 }
-.itempicture
-{
-    grid-row: span 3;
-    grid-column: span 3;
-    margin: 20px;
-    border: 3px solid black;
-    display: flex;
-    align-self: center;
-    justify-content: center;
-}
-.checkoutbuttondiv
-{
-    grid-row: span 2;
-    grid-column: span 3;
-    margin: 25px;
-}
 .checkoutbutton
 {
-    height: 50px;
-    width: 191px;
-    border: 3px black solid;
+    z-index: 3;
+    height: 75px;
+    width: 250px;
+    border-radius: 37% 63% 18% 82% / 70% 50% 50% 30%  ;
     background-color: #ec8a29;
     align-self: center;
-    justify-content: center;
     text-align: center;
+    position: absolute;
+    bottom: 0;
+    right: 55px;
 }
 .checkoutbutton:hover
 {
     background-color: #e06f26;
     transition: background-color 0.5s 100ms;
 }
-.dropbtn
+.email, .name
 {
-    background-color: #ec8a29;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
+    padding: 5px;
+    box-shadow: #000;
 }
 .dropbtn
 {
+    z-index: 1000;
+    border-radius: 61% 39% 82% 18% / 70% 64% 36% 30%;
     background-color: #ec8a29;
-    color: white;
-    padding: 16px;
+    color: black;
+    padding: 25px;
     font-size: 16px;
     border: none;
     cursor: pointer;
 }
 .dropdown
 {
+    z-index: 1000;
     position: relative;
     display: inline-block;
 }
 .dropdown-content
 {
+    z-index: 1000;
     display: none;
     position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 100%;
     background-color: #f9f9f9;
     min-width: 300px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    grid-template-columns: repeat(9, 1fr);
+    grid-template-columns: repeat(9, 40px);
 }
 .dropdown-option
 {
+    z-index: 1000;
     color: black;
-    padding: 12px;
+    padding: 5px;
     text-align: center;
     background-color: #e0e0e0;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+@media (max-width: 725px)
+{
+    .itembox
+    {
+        grid-column: 2/ span 5;
     }
+}
 .dropdown-option:hover 
 {
     background-color: #f1f1f1;
@@ -576,6 +752,10 @@ form
 {
     cursor: not-allowed;
 }
+.hover
+{
+    cursor: pointer;
+}
 .nohover1
 {
     cursor: not-allowed;
@@ -586,20 +766,17 @@ form
 }
 .close
 {
-    height: 30px;
-    width: 191px;
-    border: 3px black solid;
-    border-top: none;
-    background-color: #ec8a29;
-    justify-content: center;
+    position: absolute;
+    display: flex;
+    place-content: right;
+    margin-top: 100px;
+    margin-right: 25px;
+    right: 0;
+    height: 55px;
+    width: 50px;
     text-align: center;
-    align-self: center;
     font-family: "Noto Sans", sans-serif;
-}
-.close:hover
-{
-    background-color: #e06f26;
-    transition: background-color 0.5s 100ms;
+    font-size: 45px;
 }
 .popup {
     display: block; /* Hidden by default */
@@ -615,8 +792,7 @@ form
   /* Popup content */
   .popup-content {
     margin: 5% auto; /* Centered vertically and horizontally */
-    width: 75%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 900px;
     text-align: center;
   }
   
@@ -664,7 +840,7 @@ form
   */
   svg path,
   svg rect{
-    fill: #FF6700;
+    fill: snow;
   }
   .slide-up {
     position: relative;
@@ -691,4 +867,57 @@ form
 .show
 {
     opacity: 1;
+}
+.shake:hover
+{
+    animation: shake 0.9s infinite alternate;
+}
+@keyframes shake
+{
+    0% { transform: translateX(0) }
+  25% { transform: translateY(-9px) }
+  35% { transform: translateY(-9px) rotate(17deg) }
+  55% { transform: translateY(-9px) rotate(-17deg) }
+  65% { transform: translateY(-9px) rotate(17deg) }
+  75% { transform: translateY(-9px) rotate(-17deg) }
+  100% { transform: translateY(0) rotate(0) }
+}
+.aboutpagecont
+{
+    grid-column: 2 / span 10;
+    grid-row: span 8;
+    background: rgba(255, 255, 255, 0.11);
+    backdrop-filter: blur(50px);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 25px;
+    overflow: scroll;
+}
+ul
+{
+    align-self: center;
+    text-align: left;
+}
+li
+{
+padding-bottom: 5px ;
+}
+.aboutpage
+{
+    margin: 0;
+    transition: transform 0.4s cubic-bezier(0.75, 2, 0.75, 1);
+    color: #f47e2b;
+}
+.aboutpage:hover
+{
+    transform: scale(1.2);
+    color: #FFD700;
+}
+.nomargin
+{
+    margin: 0;
 }

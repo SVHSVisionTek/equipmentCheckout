@@ -8,12 +8,6 @@ let selectedEquipment;
 
 
 
-// get year for footer
-
-let copydate = document.getElementById('footercopyrightdate');
-const d = new Date();
-let year = d.getFullYear();
-copydate.innerHTML = `©Vision_Tek ${year}`;
 
 
 let url = 'https://api.sheety.co/8ec23e810fa3efa81389bcea9a3c14a5/checkoutInventory/sheet1';
@@ -38,7 +32,18 @@ fetch(url)
                 // create div
             const box = document.createElement('div'); 
             // create classes for div
-            box.classList.add('itemcheckout', 'bgcolorwhite', 'slide-up');
+            box.classList.add('itemcheckout', 'slide-up');
+
+            let num = Math.floor(Math.random() * 3) + 1;
+
+            if (num === 1) {
+                box.classList.add('blob1')
+            } else if (num === 2) {
+                box.classList.add('blob2')
+            } else {
+                box.classList.add('blob3')
+            }
+
 
             // itemimage div
                 const itemimage = document.createElement('div');
@@ -57,12 +62,6 @@ fetch(url)
                 // create item banner div
                 const bannercont = document.createElement('div');
                 bannercont.classList.add('itembanner1');
-
-                if (card.checkedOut === true)
-            {
-                bannercont.classList.add('bgcolorgray');
-            }
-
 
                 // adding item title div
                     const itemtitlediv = document.createElement('div');
@@ -94,7 +93,14 @@ fetch(url)
                 
 
                             const carticon = document.createElement('i');
-                            carticon.classList.add('fa-solid', 'fa-cart-plus', 'addtocart1');
+                            carticon.classList.add('fa-solid', 'fa-cart-plus', 'addtocart1', 'hover', 'shake');
+
+                            if (card.checkedOut === true)
+                            {
+                                bannercont.classList.add('bgcolorgray');
+                                carticon.classList.remove('hover', 'shake')
+                                carticon.classList.add('nohover')
+                            }
 
 
                             // adding the carticon into addtocart
@@ -156,8 +162,7 @@ fetch(url)
                         option.addEventListener('click', () => {
                             const selectedValue = option.getAttribute('data-value');
                             displaySelection.textContent = `You selected: ${selectedValue}`;
-                            selectedSDCardInput.value = selectedValue; // Store the selected value in the hidden inputw
-                            
+                            selectedSDCardInput.value = selectedValue; // Store the selected value in the hidden input
                         });
                     });
             }

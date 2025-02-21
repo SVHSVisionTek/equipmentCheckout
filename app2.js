@@ -28,7 +28,17 @@ fetch(url)
                 // create div
             const box = document.createElement('div'); 
             // create classes for div
-            box.classList.add('itemcheckout', 'bgcolorwhite');
+            box.classList.add('itemcheckout', 'slide-up');
+
+            let num = Math.floor(Math.random() * 3) + 1;
+
+            if (num === 1) {
+                box.classList.add('blob1')
+            } else if (num === 2) {
+                box.classList.add('blob2')
+            } else {
+                box.classList.add('blob3')
+            }
 
             // itemimage div
                 const itemimage = document.createElement('div');
