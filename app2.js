@@ -6,6 +6,10 @@ let formitempic = document.getElementById('formitempic');
 
 let selectedEquipment;
 
+
+
+
+
 let url = 'https://api.sheety.co/8ec23e810fa3efa81389bcea9a3c14a5/checkoutInventory/sheet1';
 fetch(url)
 .then((response) => response.json())
@@ -16,13 +20,13 @@ fetch(url)
     if (sheetData) {
         let loader = document.getElementById('loader');
         loader.remove();
-        
         const container = document.querySelector('.equipcheckoutcont');
         // Loop through the JSON data and write HTML elements
         for (let i = 0; i < sheetData.length; i++) {
             const card = sheetData[i];
             if (card.category === "Camera Equipment")
             {
+                
 
                 // html in javascript starts
                 // create div
@@ -39,6 +43,7 @@ fetch(url)
             } else {
                 box.classList.add('blob3')
             }
+
 
             // itemimage div
                 const itemimage = document.createElement('div');
@@ -57,12 +62,6 @@ fetch(url)
                 // create item banner div
                 const bannercont = document.createElement('div');
                 bannercont.classList.add('itembanner1');
-
-                if (card.checkedOut === true)
-            {
-                bannercont.classList.add('bgcolorgray');
-            }
-
 
                 // adding item title div
                     const itemtitlediv = document.createElement('div');
@@ -89,13 +88,19 @@ fetch(url)
                     // creating the checkout link
                     let addtocart = document.createElement('button');
                     addtocart.id = card.number;
-                    console.log(card.number)
-                    addtocart.classList.add('addtocart1');
+                    addtocart.classList.add('addtocart1', 'shake');
                     addtocart.addEventListener('click', function(){openPopup()}); // Attach the function as a click event listener
                 
 
                             const carticon = document.createElement('i');
-                            carticon.classList.add('fa-solid', 'fa-cart-plus', 'addtocart1');
+                            carticon.classList.add('fa-solid', 'fa-cart-plus', 'addtocart1', 'hover', 'shake');
+
+                            if (card.checkedOut === true)
+                            {
+                                bannercont.classList.add('bgcolorgray');
+                                carticon.classList.remove('hover', 'shake')
+                                carticon.classList.add('nohover')
+                            }
 
 
                             // adding the carticon into addtocart
@@ -147,6 +152,19 @@ fetch(url)
                         })
                         .catch(error => console.error('Error:', error)); // Handle any errors
                     } 
+                // Get selected SD card value and store it in a hidden input field
+                const dropdownOptions = document.querySelectorAll('.dropdown-option');
+                const displaySelection = document.getElementById('display-selection');
+                const selectedSDCardInput = document.getElementById('selectedSDCard');
+                
+                // ;mpadnsoibuyvagcAUISq0   -erduocfghidueojpk0rt-ihdgufytckvuihojp0iu9y8ftdrxdhzfsdhxtryfugiho8[u9-y8t76ri5eystehrjdyfkugiho8pu9i0uy87tfu6drsewDSZestdrf67y8oup9iu8oy7t6d54jsteharwhestjdyfliy7;o8u'i9876tfdryestawrbetdyfi7;o8u'i9u8y7t6fdresjhwestdrf7y8u90-8y7t6rsewgrehtd678y9u-i]09uy8t76rstezGSZehtdyfg890ui-=u9y8t76drsezSGErd67t8yu9709t8r6e5jstehartsdy789y07-89t76r5ysteharhstj6t78y970-70tr65eysrthasrd5y6rt789y708-079t6
+                    dropdownOptions.forEach(option => {
+                        option.addEventListener('click', () => {
+                            const selectedValue = option.getAttribute('data-value');
+                            displaySelection.textContent = `You selected: ${selectedValue}`;
+                            selectedSDCardInput.value = selectedValue; // Store the selected value in the hidden input
+                        });
+                    });
             }
                 
 
@@ -155,8 +173,7 @@ fetch(url)
         }
     } else {
         console.error('sheet1 property is undefined');
-        alert('Ran out of free sheetly uses, wait a week and try again')
-
+        alert('Ran out of free sheetly uses. Please see Mr. Vogel.')
     }
 })
 .catch(error => console.error('Error:', error)); // Optional: Add error handling
@@ -172,6 +189,42 @@ function closePopup() {
 
 const dropdownOptions = document.querySelectorAll('.dropdown-option');
 const displaySelection = document.getElementById('display-selection');
+const selectedSDCardInput = document.getElementById('selectedSDCard');
+
+        fetch(url)
+        .then((response) => response.json())
+         .then(json => {
+            const sheetData = json.sheet1; // Access the data array
+
+            // Loop through the data to find "Camera Kit 1"
+            for (let i = 0; i < sheetData.length; i++) {
+                const card = sheetData[i]; // Access each item
+                
+                if (card.category === "SD Card") { // Check if it's "Camera Kit 1"
+                    let dropdownholder = document.getElementById('dropdownholder')
+                    let dropdowndiv = document.createElement('div')
+
+                    dropdowndiv.classList.add('dropdown-option')
+                    dropdowndiv.setAttribute('data-value', card.equipmentItem)
+
+                    dropdownholder.appendChild(dropdowndiv)
+
+                    let dropdowndivtxt = document.createElement('p')
+                    dropdowndivtxt.innerHTML = card.equipmentItem;
+
+                    dropdowndiv.appendChild(dropdowndivtxt);
+
+                    if (card.checkedOut === true)
+                    {
+                        dropdowndiv.classList.add('nohover1', 'bgcolorgray')
+                        dropdowndiv.removeAttribute('data-value', card.equipmentItem)
+                    }
+
+                }
+            }
+        })
+        .catch(error => console.error('Error:', error)); // Handle any errors
+
 
 
 
@@ -182,6 +235,7 @@ function validateCheckout() {
     // Get user inputs
     const email = document.getElementById("email").value.trim();
     const name = document.getElementById("name").value.trim();
+    const selectedSDCard = selectedSDCardInput.value;
 
     // Simple email validation regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -197,6 +251,11 @@ function validateCheckout() {
         return;
     }
 
+    if (!selectedSDCard) {
+        alert("Please select an SD card.");
+        return;
+    }
+
     // Proceed with the checkout process if all validations pass
     alert("Checkout successful!");
 
@@ -209,6 +268,8 @@ function validateCheckout() {
             const sheetData = json.sheet1;
     
             // Find the selected SD card and Camera Kit 1
+
+            const selectedCardEntry = sheetData.find(item => item.equipmentItem === selectedSDCard);
             const camerakit = sheetData.find(item => item.equipmentItem === formtitle.innerHTML);
 
     
@@ -246,8 +307,23 @@ function validateCheckout() {
             };
     
             // Update selected SD card and Camera Kit 1 if found
+            updateItem(selectedCardEntry, name, email);
             updateItem(camerakit, name, email);
         })
         .catch(error => console.error('Error fetching data:', error));
     
 }
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entries) => {
+        console.log(entries)
+        if (entries.isIntersecting) {
+            entry.target.classList.add('show');
+        }
+        else{
+            entry.target.classList.remove('show')
+        }
+    })
+})
+
+const scrollanimation = document.querySelectorAll('.itemcheckout');
+scrollanimation.forEach((el) => observer.observe(el))

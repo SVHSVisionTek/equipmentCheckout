@@ -88,7 +88,7 @@ fetch(url)
                     // creating the checkout link
                     let addtocart = document.createElement('button');
                     addtocart.id = card.number;
-                    addtocart.classList.add('addtocart1');
+                    addtocart.classList.add('addtocart1', 'shake');
                     addtocart.addEventListener('click', function(){openPopup()}); // Attach the function as a click event listener
                 
 

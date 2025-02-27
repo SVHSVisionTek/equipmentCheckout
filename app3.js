@@ -23,6 +23,7 @@ fetch(url)
             const card = sheetData[i];
             if (card.category === "Other")
             {
+                    
 
                 // html in javascript starts
                 // create div
@@ -39,6 +40,7 @@ fetch(url)
             } else {
                 box.classList.add('blob3')
             }
+
 
             // itemimage div
                 const itemimage = document.createElement('div');
@@ -57,12 +59,6 @@ fetch(url)
                 // create item banner div
                 const bannercont = document.createElement('div');
                 bannercont.classList.add('itembanner1');
-
-                if (card.checkedOut === true)
-            {
-                bannercont.classList.add('bgcolorgray');
-            }
-
 
                 // adding item title div
                     const itemtitlediv = document.createElement('div');
@@ -89,13 +85,19 @@ fetch(url)
                     // creating the checkout link
                     let addtocart = document.createElement('button');
                     addtocart.id = card.number;
-                    console.log(card.number)
                     addtocart.classList.add('addtocart1');
                     addtocart.addEventListener('click', function(){openPopup()}); // Attach the function as a click event listener
                 
 
                             const carticon = document.createElement('i');
-                            carticon.classList.add('fa-solid', 'fa-cart-plus', 'addtocart1');
+                            carticon.classList.add('fa-solid', 'fa-cart-plus', 'addtocart1', 'hover', 'shake');
+
+                            if (card.checkedOut === true)
+                            {
+                                bannercont.classList.add('bgcolorgray');
+                                carticon.classList.remove('hover', 'shake')
+                                carticon.classList.add('nohover')
+                            }
 
 
                             // adding the carticon into addtocart
