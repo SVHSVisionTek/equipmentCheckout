@@ -1,14 +1,20 @@
-body
-{
+/* 
+  Ensures the entire page body has zero margin/padding.
+  Also sets a soft, pinkish background color (you had commented out a custom image background).
+*/
+body {
     background: #FDF7FA;
     margin: 0;
     padding: 0;
-    /* background-image: url('https://i.pinimg.com/originals/70/94/c0/7094c069d31d621bb8de4c3318bd72a9.jpg'); */
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-}
-
+    background-size: cover;            /* Makes background image cover the entire container */
+    background-position: center;       /* Centers the background image */
+    background-attachment: fixed;      /* Background image remains fixed in place during scrolling */
+  }
+  
+  /* 
+    .wrapper is set behind everything else (z-index: -10) 
+    and blurred to create a gradient backdrop effect. 
+  */
   .wrapper {
     position: fixed;
     top: 0;
@@ -16,104 +22,124 @@ body
     width: 100%;
     height: 100%;
     overflow: hidden;
-    filter: blur(40px);
+    filter: blur(40px);     /* Blurs all content within this container */
     z-index: -10;
   }
-
+  
+  /* 
+    Each .gradient circle will animate using mix-blend-mode: screen 
+    to blend together in interesting ways. 
+  */
   .gradient {
     position: absolute;
     border-radius: 100%;
     opacity: 0.7;
-    mix-blend-mode: screen;
+    mix-blend-mode: screen;       /* Blends the gradient with background colors */
     animation-iteration-count: infinite;
     animation-timing-function: cubic-bezier(0.1, 0, 0.9, 1);
   }
-.gradient-1 {
-background: rgb(244, 126, 43) none repeat scroll 0% 0% / auto padding-box border-box;
-width: 700px;
-height: 700px;
-animation-duration: 20s;
-opacity: 1;
-left: 60%;
-top: 40%;
-z-index: -2;
-animation-name: animation-gradient-1;
-}
-.gradient-2 {
-background: rgb(170, 88, 30) none repeat scroll 0% 0% / auto padding-box border-box;
-width: 600px;
-height: 600px;
-animation-duration: 20s;
-opacity: 0.6;
-left: 40%;
-top: 60%;
-z-index: -1;
-animation-name: animation-gradient-2;
-}
-.gradient-3 {
-background: rgb(247, 164, 106) none repeat scroll 0% 0% / auto padding-box border-box;
-width: 500px;
-height: 500px;
-animation-duration: 20s;
-opacity: 0.6;
-left: 50%;
-top: 50%;
-z-index: -3;
-animation-name: animation-gradient-3;
-}
-
+  
+  /* 
+    Gradient #1 
+    - A large circle that animates on a 20s loop 
+    - Placed at (left: 60%, top: 40%)
+  */
+  .gradient-1 {
+    background: rgb(244, 126, 43);
+    width: 700px;
+    height: 700px;
+    animation-duration: 20s;
+    opacity: 1;
+    left: 60%;
+    top: 40%;
+    z-index: -2;
+    animation-name: animation-gradient-1;
+  }
+  
+  /* 
+    Gradient #2 
+    - Another circle, slightly smaller, also animates over 20s. 
+  */
+  .gradient-2 {
+    background: rgb(170, 88, 30);
+    width: 600px;
+    height: 600px;
+    animation-duration: 20s;
+    opacity: 0.6;
+    left: 40%;
+    top: 60%;
+    z-index: -1;
+    animation-name: animation-gradient-2;
+  }
+  
+  /* 
+    Gradient #3 
+    - Smallest circle, has a subtler, slower movement pattern. 
+  */
+  .gradient-3 {
+    background: rgb(247, 164, 106);
+    width: 500px;
+    height: 500px;
+    animation-duration: 20s;
+    opacity: 0.6;
+    left: 50%;
+    top: 50%;
+    z-index: -3;
+    animation-name: animation-gradient-3;
+  }
+  
+  /* Keyframes for gradient #1’s animations */
   @keyframes animation-gradient-1 {
     0% {
       transform: translateY(-50%) translateX(-50%) rotate(-20deg) translateX(20%);
     }
     25% {
       transform: translateY(-50%) translateX(-50%) skew(-15deg, -15deg)
-        rotate(80deg) translateX(30%);
+                 rotate(80deg) translateX(30%);
     }
     50% {
       transform: translateY(-50%) translateX(-50%) rotate(180deg) translateX(25%);
     }
     75% {
       transform: translateY(-50%) translateX(-50%) skew(15deg, 15deg)
-        rotate(240deg) translateX(15%);
+                 rotate(240deg) translateX(15%);
     }
     100% {
       transform: translateY(-50%) translateX(-50%) rotate(340deg) translateX(20%);
     }
   }
   
+  /* Keyframes for gradient #2’s animations */
   @keyframes animation-gradient-2 {
     0% {
       transform: translateY(-50%) translateX(-50%) rotate(40deg) translateX(-20%);
     }
     25% {
       transform: translateY(-50%) translateX(-50%) skew(15deg, 15deg)
-        rotate(110deg) translateX(-5%);
+                 rotate(110deg) translateX(-5%);
     }
     50% {
       transform: translateY(-50%) translateX(-50%) rotate(210deg) translateX(-35%);
     }
     75% {
       transform: translateY(-50%) translateX(-50%) skew(-15deg, -15deg)
-        rotate(300deg) translateX(-10%);
+                 rotate(300deg) translateX(-10%);
     }
     100% {
       transform: translateY(-50%) translateX(-50%) rotate(400deg) translateX(-20%);
     }
   }
   
+  /* Keyframes for gradient #3’s animations */
   @keyframes animation-gradient-3 {
     0% {
-      transform: translateY(-50%) translateX(-50%) translateX(-15%)
-        translateY(10%);
+      transform: translateY(-50%) translateX(-50%) translateX(-15%) translateY(10%);
     }
     20% {
-      transform: translateY(-50%) translateX(-50%) translateX(20%)
-        translateY(-30%);
+      transform: translateY(-50%) translateX(-50%) translateX(20%) translateY(-30%);
     }
     40% {
-      transform: translateY(-50%) translateX(-50%) translateX(-25%)
-        translateY(-15%);
+      transform: translateY(-50%) translateX(-50%) translateX(-25%) translateY(-15%);
     }
     60% {
       transform: translateY(-50%) translateX(-50%) translateX(30%) translateY(20%);
@@ -122,38 +148,50 @@ animation-name: animation-gradient-3;
       transform: translateY(-50%) translateX(-50%) translateX(5%) translateY(35%);
     }
     100% {
-      transform: translateY(-50%) translateX(-50%) translateX(-15%)
-        translateY(10%);
+      transform: translateY(-50%) translateX(-50%) translateX(-15%) translateY(10%);
     }
   }
-.container1
-{
+  
+  /* 
+    Container grids (container1, container2, container3) with 12 columns & 11 rows.
+    Typically used to structure the page in sections.
+  */
+  .container1 {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(11, 65px);
-}
-.container2
-{
+  }
+  
+  .container2 {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(11, 65px);
-}
-.container3
-{
+  }
+  
+  .container3 {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(11, 65px);
-}
-.navbar {
+  }
+  
+  /* 
+    Navbar spans all 12 columns and 4 rows (as declared).
+    Another nested grid inside for positioning. 
+  */
+  .navbar {
     grid-column: span 12;
-    grid-row: span 4; /* Keep this if the structure depends on 4 rows */
+    grid-row: span 4; 
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(3, 1fr);
     position: relative;
-}
-
-.navbar::before {
+  }
+  
+  /* 
+    .navbar::before uses a pseudo-element to partially fill the navbar background.
+    height is set to 2/3 of its parent’s total height. 
+  */
+  .navbar::before {
     content: "";
     position: absolute;
     top: 0;
@@ -161,9 +199,14 @@ animation-name: animation-gradient-3;
     width: 100%;
     height: calc(2 * (100% / 3)); /* Covers 2 out of 3 rows */
     background-color: #FDF7FA;
-    z-index: -1; /* Sends it behind the content */
-}
-.footer {
+    z-index: -1; /* Sits behind the navbar content */
+  }
+  
+  /* 
+    Footer section. 
+    --mask is a custom property creating a wave-like masking effect.
+  */
+  .footer {
     grid-column: span 12;
     display: flex;
     justify-content: center;
@@ -174,153 +217,173 @@ animation-name: animation-gradient-3;
     padding: 20px;
     height: auto;
     text-align: center;
+  
+    /* The wave effect for the top edge using radial gradients */
     --mask:
-    radial-gradient(67.08px at 50% 90px,#000 99%,#0000 101%) calc(50% - 60px) 0/120px 100%,
-    radial-gradient(67.08px at 50% -60px,#0000 99%,#000 101%) 50% 30px/120px 100% repeat-x;
-  -webkit-mask: var(--mask);
-          mask: var(--mask);
-          padding-top: 50px;
-}
-
-.footerinfo {
+      radial-gradient(67.08px at 50% 90px, #000 99%, #0000 101%) calc(50% - 60px) 0/120px 100%,
+      radial-gradient(67.08px at 50% -60px, #0000 99%, #000 101%) 50% 30px/120px 100% repeat-x;
+    -webkit-mask: var(--mask);
+            mask: var(--mask);
+    padding-top: 50px;
+  }
+  
+  .footerinfo {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
-}
-.fa-brands {
+  }
+  
+  /* 
+    Font Awesome brand icons 
+    - On hover, scale and color change to gold
+  */
+  .fa-brands {
     font-size: 35px;
     color: #f47e2b;
     transition: transform 0.4s cubic-bezier(0.75, 2, 0.75, 1), color 0.3s;
-    display: inline-block;  /* Ensures it behaves properly */
+    display: inline-block; 
     padding-left: 5px;
     padding-right: 5px;
-}
-.fa-brands:hover {
+  }
+  
+  .fa-brands:hover {
     color: #FFD700;
     transform: scale(1.2);
-}
-.vtbanner
-{
+  }
+  
+  /* 
+    The top banner for "VT" branding 
+  */
+  .vtbanner {
     grid-column: span 12;
     grid-row: span 1;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(1, 100px);
     background-color: #FDF7FA;
-
-}
-.vtlogopic
-{
+  }
+  
+  .vtlogopic {
     margin: auto;
     grid-column: span 2;
     height: 85%;
-}
-.vttitle
-{
+  }
+  
+  .vttitle {
     grid-column: span 10;
-}
-.maintitle
-{
+  }
+  
+  .maintitle {
     margin-bottom: 5px;
     font-weight: bold;
-}
-.secondarytitle
-{
+  }
+  
+  .secondarytitle {
     margin-top: 5px;
-}
-.navlinks
-{
+  }
+  
+  /* 
+    Navigation link bar with 12 columns, 2 rows 
+  */
+  .navlinks {
     grid-column: span 12;
     grid-row: span 2;
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: repeat(6, 1fr);
     background-color: #e06f26;
-
-}
-.waves
-{
+  }
+  
+  /* 
+    A wave-like effect on elements 
+    achieved through mask (multiple radial gradients).
+  */
+  .waves {
     --mask:
-    radial-gradient(78.26px at 50% 105px,#000 99%,#0000 101%) calc(50% - 70px) 0/140px 51% repeat-x,
-    radial-gradient(78.26px at 50% -70px,#0000 99%,#000 101%) 50% 35px/140px calc(51% - 35px) repeat-x,
-    radial-gradient(78.26px at 50% calc(100% - 105px),#000 99%,#0000 101%) 50% 100%/140px 51% repeat-x,
-    radial-gradient(78.26px at 50% calc(100% + 70px),#0000 99%,#000 101%) calc(50% - 70px) calc(100% - 35px)/140px calc(51% - 35px) repeat-x;
-  -webkit-mask: var(--mask);
-          mask: var(--mask);
-}
-.placeholderlinks
-{
+      radial-gradient(78.26px at 50% 105px, #000 99%, #0000 101%) calc(50% - 70px) 0/140px 51% repeat-x,
+      radial-gradient(78.26px at 50% -70px, #0000 99%, #000 101%) 50% 35px/140px calc(51% - 35px) repeat-x,
+      radial-gradient(78.26px at 50% calc(100% - 105px), #000 99%, #0000 101%) 50% 100%/140px 51% repeat-x,
+      radial-gradient(78.26px at 50% calc(100% + 70px), #0000 99%, #000 101%) calc(50% - 70px) calc(100% - 35px)/140px calc(51% - 35px) repeat-x;
+    -webkit-mask: var(--mask);
+            mask: var(--mask);
+  }
+  
+  /* Empty placeholders for spacing in the navlinks */
+  .placeholderlinks {
     grid-column: span 2;
-}
-button
-{
+  }
+  
+  /* 
+    Reset all default styles on buttons 
+    so we can style them from scratch.
+  */
+  button {
     all: unset;
-}
-.cameranavlink
-{
+  }
+  
+  /* 
+    Navigation link styling and hover effect 
+    - The “camera” link blocks 
+  */
+  .cameranavlink,
+  .cameraaccnavlink,
+  .miscnavlink {
     text-align: center;
     width: 100%;
     height: 100%;
     transition: background-color 0.5s 100ms;
-}
-.cameranavlink:hover
-{
+  }
+  
+  .cameranavlink:hover,
+  .cameraaccnavlink:hover,
+  .miscnavlink:hover {
     background-color: #e06f26;
-}
-.cameraaccnavlink
-{
-    text-align: center;
-    width: 100%;
-    height: 100%;
-    transition: background-color 0.5s 100ms;
-}
-.cameraaccnavlink:hover
-{
-    background-color: #e06f26;
-}
-.miscnavlink
-{
-    text-align: center;
-    width: 100%;
-    height: 100%;
-    transition: background-color 0.5s 100ms;
-}
-.miscnavlink:hover
-{
-    background-color: #e06f26;
-}
-.linkbutton
-{
+  }
+  
+  /* 
+    Common link button styling 
+    - Scale effect on hover 
+  */
+  .linkbutton {
     text-align: center;
     width: 100%;
     height: 100%;
     transition: background-color 1s 100ms;
     transition: transform 0.4s cubic-bezier(0.75, 2, 0.75, 1);
-}
-.linkbutton:hover {
-    transform: scale(1.2); /* Slightly enlarges */
-}
-
-
-.reformatlinktext
-{
+  }
+  
+  .linkbutton:hover {
+    transform: scale(1.2);
+  }
+  
+  .reformatlinktext {
     margin: 0;
     color: black;
-}
-a
-{
+  }
+  
+  /* Removes underline from links */
+  a {
     text-decoration: none;
-}
-.equipcheckoutcont {
+  }
+  
+  /* 
+    Main container for the equipment checkout 
+    with 13 columns, auto-rows of 62.5px 
+  */
+  .equipcheckoutcont {
     grid-column: span 12;
     grid-row: span 10;
     display: grid;
     grid-template-columns: repeat(13, 1fr);
     grid-auto-rows: 62.5px;
-}
-
-.itemcheckout {
+  }
+  
+  /* 
+    Each item card in the checkout grid 
+    - box-shadow changes color on hover 
+  */
+  .itemcheckout {
     background-color: white;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
@@ -328,350 +391,364 @@ a
     overflow: hidden;
     padding: 25px;
     padding-bottom: 0px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-.itemcheckout:hover {
-    box-shadow: 0 4px 8px 0 #FFD700, 0 6px 20px 0 #FFD700;
-}
-.blob1
-{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+                0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  
+  .itemcheckout:hover {
+    box-shadow: 0 4px 8px 0 #FFD700,
+                0 6px 20px 0 #FFD700;
+  }
+  
+  /* 
+    Example "blob" shapes to round corners 
+    in interesting ways 
+  */
+  .blob1 {
     border-radius: 26% 74% 22% 68% / 54% 21% 59% 46%;
-}
-.blob2
-{
+  }
+  .blob2 {
     border-radius: 48% 52% 23% 57% / 70% 66% 34% 30%;
-}
-.blob3
-{
+  }
+  .blob3 {
     border-radius: 71% 9% 72% 28% / 15% 52% 48% 65%;
-}
-
-/* Positioning each item based on its order */
-/* Positioning each item based on its order */
-.itemcheckout:nth-of-type(1) { grid-column: 2 / span 3; grid-row: 2 / span 8; }
-.itemcheckout:nth-of-type(2) { grid-column: 6 / span 3; grid-row: 2 / span 8; }
-.itemcheckout:nth-of-type(3) { grid-column: 10 / span 3; grid-row: 2 / span 8; }
-
-.itemcheckout:nth-of-type(4) { grid-column: 2 / span 3; grid-row: 11 / span 8; }
-.itemcheckout:nth-of-type(5) { grid-column: 6 / span 3; grid-row: 11 / span 8; }
-.itemcheckout:nth-of-type(6) { grid-column: 10 / span 3; grid-row: 11 / span 8; }
-
-.itemcheckout:nth-of-type(7) { grid-column: 2 / span 3; grid-row: 20 / span 8; }
-.itemcheckout:nth-of-type(8) { grid-column: 6 / span 3; grid-row: 20 / span 8; }
-.itemcheckout:nth-of-type(9) { grid-column: 10 / span 3; grid-row: 20 / span 8; }
-
-.itemcheckout:nth-of-type(10) { grid-column: 2 / span 3; grid-row: 29 / span 8; }
-.itemcheckout:nth-of-type(11) { grid-column: 6 / span 3; grid-row: 29 / span 8; }
-.itemcheckout:nth-of-type(12) { grid-column: 10 / span 3; grid-row: 29 / span 8; }
-
-.itemcheckout:nth-of-type(13) { grid-column: 2 / span 3; grid-row: 38 / span 8; }
-.itemcheckout:nth-of-type(14) { grid-column: 6 / span 3; grid-row: 38 / span 8; }
-.itemcheckout:nth-of-type(15) { grid-column: 10 / span 3; grid-row: 38 / span 8; }
-
-.itemcheckout:nth-of-type(16) { grid-column: 2 / span 3; grid-row: 47 / span 8; }
-.itemcheckout:nth-of-type(17) { grid-column: 6 / span 3; grid-row: 47 / span 8; }
-.itemcheckout:nth-of-type(18) { grid-column: 10 / span 3; grid-row: 47 / span 8; }
-
-.itemcheckout:nth-of-type(19) { grid-column: 2 / span 3; grid-row: 56 / span 8; }
-.itemcheckout:nth-of-type(20) { grid-column: 6 / span 3; grid-row: 56 / span 8; }
-.itemcheckout:nth-of-type(21) { grid-column: 10 / span 3; grid-row: 56 / span 8; }
-
-.itemcheckout:nth-of-type(22) { grid-column: 2 / span 3; grid-row: 65 / span 8; }
-.itemcheckout:nth-of-type(23) { grid-column: 6 / span 3; grid-row: 65 / span 8; }
-.itemcheckout:nth-of-type(24) { grid-column: 10 / span 3; grid-row: 65 / span 8; }
-
-.itemcheckout:nth-of-type(25) { grid-column: 2 / span 3; grid-row: 74 / span 8; }
-.itemcheckout:nth-of-type(26) { grid-column: 6 / span 3; grid-row: 74 / span 8; }
-.itemcheckout:nth-of-type(27) { grid-column: 10 / span 3; grid-row: 74 / span 8; }
-
-.itemcheckout:nth-of-type(28) { grid-column: 2 / span 3; grid-row: 83 / span 8; }
-.itemcheckout:nth-of-type(29) { grid-column: 6 / span 3; grid-row: 83 / span 8; }
-.itemcheckout:nth-of-type(30) { grid-column: 10 / span 3; grid-row: 83 / span 8; }
-
-.itemcheckout:nth-of-type(31) { grid-column: 2 / span 3; grid-row: 92 / span 8; }
-.itemcheckout:nth-of-type(32) { grid-column: 6 / span 3; grid-row: 92 / span 8; }
-.itemcheckout:nth-of-type(33) { grid-column: 10 / span 3; grid-row: 92 / span 8; }
-
-.itemcheckout:nth-of-type(34) { grid-column: 2 / span 3; grid-row: 101 / span 8; }
-.itemcheckout:nth-of-type(35) { grid-column: 6 / span 3; grid-row: 101 / span 8; }
-.itemcheckout:nth-of-type(36) { grid-column: 10 / span 3; grid-row: 101 / span 8; }
-
-.itemcheckout:nth-of-type(37) { grid-column: 2 / span 3; grid-row: 110 / span 8; }
-.itemcheckout:nth-of-type(38) { grid-column: 6 / span 3; grid-row: 110 / span 8; }
-.itemcheckout:nth-of-type(39) { grid-column: 10 / span 3; grid-row: 110 / span 8; }
-
-.itemcheckout:nth-of-type(40) { grid-column: 2 / span 3; grid-row: 119 / span 8; }
-
-    @media (max-width: 1175px)
-    {
-            .equipcheckoutcont
-        {
-            grid-column: span 12;
-            grid-row: span 10;
-            display: grid;
-            grid-template-columns: repeat(9, 1fr);
-            grid-auto-rows: 62.5px;
-        }
-        .itemcheckout {
-            display: grid;
-            grid-template-columns: repeat(8, 1fr);
-            grid-template-rows: repeat(10, 1fr);
-        }
-
-        /* Positioning each item based on its order */
-        .itemcheckout:nth-of-type(1) { grid-column: 2 / span 3; grid-row: 2 / span 8; }
-        .itemcheckout:nth-of-type(2) { grid-column: 6 / span 3; grid-row: 2 / span 8; }
-        .itemcheckout:nth-of-type(3) { grid-column: 2 / span 3; grid-row: 11 / span 8; }
-        .itemcheckout:nth-of-type(4) { grid-column: 6 / span 3; grid-row: 11 / span 8; }
-        .itemcheckout:nth-of-type(5) { grid-column: 2 / span 3; grid-row: 20 / span 8; }
-        .itemcheckout:nth-of-type(6) { grid-column: 6 / span 3; grid-row: 20 / span 8; }
-        .itemcheckout:nth-of-type(7) { grid-column: 2 / span 3; grid-row: 29 / span 8; }
-        .itemcheckout:nth-of-type(8) { grid-column: 6 / span 3; grid-row: 29 / span 8; }
-        .itemcheckout:nth-of-type(9) { grid-column: 2 / span 3; grid-row: 38 / span 8; }
-        .itemcheckout:nth-of-type(10) { grid-column: 6 / span 3; grid-row: 38 / span 8; }
-        .itemcheckout:nth-of-type(11) { grid-column: 2 / span 3; grid-row: 47 / span 8; }
-        .itemcheckout:nth-of-type(12) { grid-column: 6 / span 3; grid-row: 47 / span 8; }
-        .itemcheckout:nth-of-type(13) { grid-column: 2 / span 3; grid-row: 56 / span 8; }
-        .itemcheckout:nth-of-type(14) { grid-column: 6 / span 3; grid-row: 56 / span 8; }
-        .itemcheckout:nth-of-type(15) { grid-column: 2 / span 3; grid-row: 65 / span 8; }
-        .itemcheckout:nth-of-type(16) { grid-column: 6 / span 3; grid-row: 65 / span 8; }
-        .itemcheckout:nth-of-type(17) { grid-column: 2 / span 3; grid-row: 74 / span 8; }
-        .itemcheckout:nth-of-type(18) { grid-column: 6 / span 3; grid-row: 74 / span 8; }
-        .itemcheckout:nth-of-type(19) { grid-column: 2 / span 3; grid-row: 83 / span 8; }
-        .itemcheckout:nth-of-type(20) { grid-column: 6 / span 3; grid-row: 83 / span 8; }
-        .itemcheckout:nth-of-type(21) { grid-column: 2 / span 3; grid-row: 92 / span 8; }
-        .itemcheckout:nth-of-type(22) { grid-column: 6 / span 3; grid-row: 92 / span 8; }
-        .itemcheckout:nth-of-type(23) { grid-column: 2 / span 3; grid-row: 101 / span 8; }
-        .itemcheckout:nth-of-type(24) { grid-column: 6 / span 3; grid-row: 101 / span 8; }
-        .itemcheckout:nth-of-type(25) { grid-column: 2 / span 3; grid-row: 110 / span 8; }
-        .itemcheckout:nth-of-type(26) { grid-column: 6 / span 3; grid-row: 110 / span 8; }
-        .itemcheckout:nth-of-type(27) { grid-column: 2 / span 3; grid-row: 119 / span 8; }
-        .itemcheckout:nth-of-type(28) { grid-column: 6 / span 3; grid-row: 119 / span 8; }
-        .itemcheckout:nth-of-type(29) { grid-column: 2 / span 3; grid-row: 128 / span 8; }
-        .itemcheckout:nth-of-type(30) { grid-column: 6 / span 3; grid-row: 128 / span 8; }
-        .itemcheckout:nth-of-type(31) { grid-column: 2 / span 3; grid-row: 137 / span 8; }
-        .itemcheckout:nth-of-type(32) { grid-column: 6 / span 3; grid-row: 137 / span 8; }
-        .itemcheckout:nth-of-type(33) { grid-column: 2 / span 3; grid-row: 146 / span 8; }
-        .itemcheckout:nth-of-type(34) { grid-column: 6 / span 3; grid-row: 146 / span 8; }
-        .itemcheckout:nth-of-type(35) { grid-column: 2 / span 3; grid-row: 155 / span 8; }
-        .itemcheckout:nth-of-type(36) { grid-column: 6 / span 3; grid-row: 155 / span 8; }
-        .itemcheckout:nth-of-type(37) { grid-column: 2 / span 3; grid-row: 164 / span 8; }
-        .itemcheckout:nth-of-type(38) { grid-column: 6 / span 3; grid-row: 164 / span 8; }
-        .itemcheckout:nth-of-type(39) { grid-column: 2 / span 3; grid-row: 173 / span 8; }
-        .itemcheckout:nth-of-type(40) { grid-column: 6 / span 3; grid-row: 173 / span 8; }
+  }
+  
+  /* 
+    Positioning each .itemcheckout in a 
+    grid pattern manually via nth-of-type
+    (Like a catalog layout).
+  */
+  .itemcheckout:nth-of-type(1)  { grid-column: 2 / span 3;  grid-row: 2 / span 8; }
+  .itemcheckout:nth-of-type(2)  { grid-column: 6 / span 3;  grid-row: 2 / span 8; }
+  .itemcheckout:nth-of-type(3)  { grid-column: 10 / span 3; grid-row: 2 / span 8; }
+  .itemcheckout:nth-of-type(4)  { grid-column: 2 / span 3;  grid-row: 11 / span 8; }
+  .itemcheckout:nth-of-type(5)  { grid-column: 6 / span 3;  grid-row: 11 / span 8; }
+  .itemcheckout:nth-of-type(6)  { grid-column: 10 / span 3; grid-row: 11 / span 8; }
+  .itemcheckout:nth-of-type(7)  { grid-column: 2 / span 3;  grid-row: 20 / span 8; }
+  .itemcheckout:nth-of-type(8)  { grid-column: 6 / span 3;  grid-row: 20 / span 8; }
+  .itemcheckout:nth-of-type(9)  { grid-column: 10 / span 3; grid-row: 20 / span 8; }
+  .itemcheckout:nth-of-type(10) { grid-column: 2 / span 3;  grid-row: 29 / span 8; }
+  .itemcheckout:nth-of-type(11) { grid-column: 6 / span 3;  grid-row: 29 / span 8; }
+  .itemcheckout:nth-of-type(12) { grid-column: 10 / span 3; grid-row: 29 / span 8; }
+  .itemcheckout:nth-of-type(13) { grid-column: 2 / span 3;  grid-row: 38 / span 8; }
+  .itemcheckout:nth-of-type(14) { grid-column: 6 / span 3;  grid-row: 38 / span 8; }
+  .itemcheckout:nth-of-type(15) { grid-column: 10 / span 3; grid-row: 38 / span 8; }
+  .itemcheckout:nth-of-type(16) { grid-column: 2 / span 3;  grid-row: 47 / span 8; }
+  .itemcheckout:nth-of-type(17) { grid-column: 6 / span 3;  grid-row: 47 / span 8; }
+  .itemcheckout:nth-of-type(18) { grid-column: 10 / span 3; grid-row: 47 / span 8; }
+  .itemcheckout:nth-of-type(19) { grid-column: 2 / span 3;  grid-row: 56 / span 8; }
+  .itemcheckout:nth-of-type(20) { grid-column: 6 / span 3;  grid-row: 56 / span 8; }
+  .itemcheckout:nth-of-type(21) { grid-column: 10 / span 3; grid-row: 56 / span 8; }
+  .itemcheckout:nth-of-type(22) { grid-column: 2 / span 3;  grid-row: 65 / span 8; }
+  .itemcheckout:nth-of-type(23) { grid-column: 6 / span 3;  grid-row: 65 / span 8; }
+  .itemcheckout:nth-of-type(24) { grid-column: 10 / span 3; grid-row: 65 / span 8; }
+  .itemcheckout:nth-of-type(25) { grid-column: 2 / span 3;  grid-row: 74 / span 8; }
+  .itemcheckout:nth-of-type(26) { grid-column: 6 / span 3;  grid-row: 74 / span 8; }
+  .itemcheckout:nth-of-type(27) { grid-column: 10 / span 3; grid-row: 74 / span 8; }
+  .itemcheckout:nth-of-type(28) { grid-column: 2 / span 3;  grid-row: 83 / span 8; }
+  .itemcheckout:nth-of-type(29) { grid-column: 6 / span 3;  grid-row: 83 / span 8; }
+  .itemcheckout:nth-of-type(30) { grid-column: 10 / span 3; grid-row: 83 / span 8; }
+  .itemcheckout:nth-of-type(31) { grid-column: 2 / span 3;  grid-row: 92 / span 8; }
+  .itemcheckout:nth-of-type(32) { grid-column: 6 / span 3;  grid-row: 92 / span 8; }
+  .itemcheckout:nth-of-type(33) { grid-column: 10 / span 3; grid-row: 92 / span 8; }
+  .itemcheckout:nth-of-type(34) { grid-column: 2 / span 3;  grid-row: 101 / span 8; }
+  .itemcheckout:nth-of-type(35) { grid-column: 6 / span 3;  grid-row: 101 / span 8; }
+  .itemcheckout:nth-of-type(36) { grid-column: 10 / span 3; grid-row: 101 / span 8; }
+  .itemcheckout:nth-of-type(37) { grid-column: 2 / span 3;  grid-row: 110 / span 8; }
+  .itemcheckout:nth-of-type(38) { grid-column: 6 / span 3;  grid-row: 110 / span 8; }
+  .itemcheckout:nth-of-type(39) { grid-column: 10 / span 3; grid-row: 110 / span 8; }
+  .itemcheckout:nth-of-type(40) { grid-column: 2 / span 3;  grid-row: 119 / span 8; }
+  
+  /* 
+    Responsive adjustments 
+    - At 1175px width, we reduce columns to 9 and reposition items 
+  */
+  @media (max-width: 1175px) {
+    .equipcheckoutcont {
+      grid-column: span 12;
+      grid-row: span 10;
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      grid-auto-rows: 62.5px;
     }
-    @media (max-width: 850px) and (min-width: 501px) {
-        .itemcheckout:nth-of-type(1) {grid-column: 3 / span 5; grid-row: 2 / span 8;}
-        .itemcheckout:nth-of-type(2) {grid-column: 3 / span 5; grid-row: 11 / span 8;}
-        .itemcheckout:nth-of-type(3) {grid-column: 3 / span 5; grid-row: 20 / span 8;}
-        .itemcheckout:nth-of-type(4) {grid-column: 3 / span 5; grid-row: 29 / span 8;}
-        .itemcheckout:nth-of-type(5) {grid-column: 3 / span 5; grid-row: 38 / span 8;}
-.itemcheckout:nth-of-type(6) {grid-column: 3 / span 5; grid-row: 47 / span 8;}
-.itemcheckout:nth-of-type(7) {grid-column: 3 / span 5; grid-row: 56 / span 8;}
-.itemcheckout:nth-of-type(8) {grid-column: 3 / span 5; grid-row: 65 / span 8;}
-.itemcheckout:nth-of-type(9) {grid-column: 3 / span 5; grid-row: 74 / span 8;}
-.itemcheckout:nth-of-type(10) {grid-column: 3 / span 5; grid-row: 83 / span 8;}
-.itemcheckout:nth-of-type(11) {grid-column: 3 / span 5; grid-row: 92 / span 8;}
-.itemcheckout:nth-of-type(12) {grid-column: 3 / span 5; grid-row: 101 / span 8;}
-.itemcheckout:nth-of-type(13) {grid-column: 3 / span 5; grid-row: 110 / span 8;}
-.itemcheckout:nth-of-type(14) {grid-column: 3 / span 5; grid-row: 119 / span 8;}
-.itemcheckout:nth-of-type(15) {grid-column: 3 / span 5; grid-row: 128 / span 8;}
-.itemcheckout:nth-of-type(16) {grid-column: 3 / span 5; grid-row: 137 / span 8;}
-.itemcheckout:nth-of-type(17) {grid-column: 3 / span 5; grid-row: 146 / span 8;}
-.itemcheckout:nth-of-type(18) {grid-column: 3 / span 5; grid-row: 155 / span 8;}
-.itemcheckout:nth-of-type(19) {grid-column: 3 / span 5; grid-row: 164 / span 8;}
-.itemcheckout:nth-of-type(20) {grid-column: 3 / span 5; grid-row: 173 / span 8;}
-.itemcheckout:nth-of-type(21) {grid-column: 3 / span 5; grid-row: 182 / span 8;}
-.itemcheckout:nth-of-type(22) {grid-column: 3 / span 5; grid-row: 191 / span 8;}
-.itemcheckout:nth-of-type(23) {grid-column: 3 / span 5; grid-row: 200 / span 8;}
-.itemcheckout:nth-of-type(24) {grid-column: 3 / span 5; grid-row: 209 / span 8;}
-.itemcheckout:nth-of-type(25) {grid-column: 3 / span 5; grid-row: 218 / span 8;}
-.itemcheckout:nth-of-type(26) {grid-column: 3 / span 5; grid-row: 227 / span 8;}
-.itemcheckout:nth-of-type(27) {grid-column: 3 / span 5; grid-row: 236 / span 8;}
-.itemcheckout:nth-of-type(28) {grid-column: 3 / span 5; grid-row: 245 / span 8;}
-.itemcheckout:nth-of-type(29) {grid-column: 3 / span 5; grid-row: 254 / span 8;}
-.itemcheckout:nth-of-type(30) {grid-column: 3 / span 5; grid-row: 263 / span 8;}
-.itemcheckout:nth-of-type(31) {grid-column: 3 / span 5; grid-row: 272 / span 8;}
-.itemcheckout:nth-of-type(32) {grid-column: 3 / span 5; grid-row: 281 / span 8;}
-.itemcheckout:nth-of-type(33) {grid-column: 3 / span 5; grid-row: 290 / span 8;}
-.itemcheckout:nth-of-type(34) {grid-column: 3 / span 5; grid-row: 299 / span 8;}
-.itemcheckout:nth-of-type(35) {grid-column: 3 / span 5; grid-row: 308 / span 8;}
-.itemcheckout:nth-of-type(36) {grid-column: 3 / span 5; grid-row: 317 / span 8;}
-.itemcheckout:nth-of-type(37) {grid-column: 3 / span 5; grid-row: 326 / span 8;}
-.itemcheckout:nth-of-type(38) {grid-column: 3 / span 5; grid-row: 335 / span 8;}
-.itemcheckout:nth-of-type(39) {grid-column: 3 / span 5; grid-row: 344 / span 8;}
-.itemcheckout:nth-of-type(40) {grid-column: 3 / span 5; grid-row: 353 / span 8;}
-
-        
-
+  
+    .itemcheckout {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: repeat(10, 1fr);
     }
-        @media (max-width: 500px)
-        {
-            .shvslink
-            {
-                display: none;
-            }
-            .navlinks
-            {
-                grid-template-columns: repeat(3, 1fr);
-                text-align: center;
-            }
-            .placeholderlinks
-            {
-                display: none;
-            }
-            .secondarytitle
-            {
-                margin-left: 15px;
-            }
-            .maintitle
-            {
-                margin-left: 15px;
-            }
-            .equipcheckoutcont {
-                grid-column: span 12;
-                grid-row: span 10;
-                display: grid;
-                grid-template-columns: repeat(12, 1fr);
-                grid-auto-rows: 62.5px;
-            }
-            
-            .itemcheckout {
-                display: grid;
-                grid-template-columns: repeat(8, 1fr);
-                grid-template-rows: repeat(10, 1fr);
-            }
-            
-            /* Positioning each item in a single column */
-            .itemcheckout:nth-of-type(1) { grid-column: 2 / span 10; grid-row: 2 / span 8; }
-            .itemcheckout:nth-of-type(2) { grid-column: 2 / span 10; grid-row: 11 / span 8; }
-            .itemcheckout:nth-of-type(3) { grid-column: 2 / span 10; grid-row: 20 / span 8; }
-            .itemcheckout:nth-of-type(4) { grid-column: 2 / span 10; grid-row: 29 / span 8; }
-            .itemcheckout:nth-of-type(5) { grid-column: 2 / span 10; grid-row: 38 / span 8; }
-            .itemcheckout:nth-of-type(6) { grid-column: 2 / span 10; grid-row: 47 / span 8; }
-            .itemcheckout:nth-of-type(7) { grid-column: 2 / span 10; grid-row: 56 / span 8; }
-            .itemcheckout:nth-of-type(8) { grid-column: 2 / span 10; grid-row: 65 / span 8; }
-            .itemcheckout:nth-of-type(9) { grid-column: 2 / span 10; grid-row: 74 / span 8; }
-            .itemcheckout:nth-of-type(10) { grid-column: 2 / span 10; grid-row: 83 / span 8; }
-            .itemcheckout:nth-of-type(11) { grid-column: 2 / span 10; grid-row: 92 / span 8; }
-            .itemcheckout:nth-of-type(12) { grid-column: 2 / span 10; grid-row: 101 / span 8; }
-            .itemcheckout:nth-of-type(13) { grid-column: 2 / span 10; grid-row: 110 / span 8; }
-            .itemcheckout:nth-of-type(14) { grid-column: 2 / span 10; grid-row: 119 / span 8; }
-            .itemcheckout:nth-of-type(15) { grid-column: 2 / span 10; grid-row: 128 / span 8; }
-            .itemcheckout:nth-of-type(16) { grid-column: 2 / span 10; grid-row: 137 / span 8; }
-            .itemcheckout:nth-of-type(17) { grid-column: 2 / span 10; grid-row: 146 / span 8; }
-            .itemcheckout:nth-of-type(18) { grid-column: 2 / span 10; grid-row: 155 / span 8; }
-            .itemcheckout:nth-of-type(19) { grid-column: 2 / span 10; grid-row: 164 / span 8; }
-            .itemcheckout:nth-of-type(20) { grid-column: 2 / span 10; grid-row: 173 / span 8; }
-            .itemcheckout:nth-of-type(21) { grid-column: 2 / span 10; grid-row: 182 / span 8; }
-            .itemcheckout:nth-of-type(22) { grid-column: 2 / span 10; grid-row: 191 / span 8; }
-            .itemcheckout:nth-of-type(23) { grid-column: 2 / span 10; grid-row: 200 / span 8; }
-            .itemcheckout:nth-of-type(24) { grid-column: 2 / span 10; grid-row: 209 / span 8; }
-            .itemcheckout:nth-of-type(25) { grid-column: 2 / span 10; grid-row: 218 / span 8; }
-            .itemcheckout:nth-of-type(26) { grid-column: 2 / span 10; grid-row: 227 / span 8; }
-            .itemcheckout:nth-of-type(27) { grid-column: 2 / span 10; grid-row: 236 / span 8; }
-            .itemcheckout:nth-of-type(28) { grid-column: 2 / span 10; grid-row: 245 / span 8; }
-            .itemcheckout:nth-of-type(29) { grid-column: 2 / span 10; grid-row: 254 / span 8; }
-            .itemcheckout:nth-of-type(30) { grid-column: 2 / span 10; grid-row: 263 / span 8; }
-            .itemcheckout:nth-of-type(31) { grid-column: 2 / span 10; grid-row: 272 / span 8; }
-            .itemcheckout:nth-of-type(32) { grid-column: 2 / span 10; grid-row: 281 / span 8; }
-            .itemcheckout:nth-of-type(33) { grid-column: 2 / span 10; grid-row: 290 / span 8; }
-            .itemcheckout:nth-of-type(34) { grid-column: 2 / span 10; grid-row: 299 / span 8; }
-            .itemcheckout:nth-of-type(35) { grid-column: 2 / span 10; grid-row: 308 / span 8; }
-            .itemcheckout:nth-of-type(36) { grid-column: 2 / span 10; grid-row: 317 / span 8; }
-            .itemcheckout:nth-of-type(37) { grid-column: 2 / span 10; grid-row: 326 / span 8; }
-            .itemcheckout:nth-of-type(38) { grid-column: 2 / span 10; grid-row: 335 / span 8; }
-            .itemcheckout:nth-of-type(39) { grid-column: 2 / span 10; grid-row: 344 / span 8; }
-            .itemcheckout:nth-of-type(40) { grid-column: 2 / span 10; grid-row: 353 / span 8; }
-        }
-
-
-
-.itemimage1
-{
+  
+    /* Repositions items in fewer columns */
+    .itemcheckout:nth-of-type(1)  { grid-column: 2 / span 3; grid-row: 2 / span 8; }
+    .itemcheckout:nth-of-type(2)  { grid-column: 6 / span 3; grid-row: 2 / span 8; }
+    .itemcheckout:nth-of-type(3)  { grid-column: 2 / span 3; grid-row: 11 / span 8; }
+    .itemcheckout:nth-of-type(4)  { grid-column: 6 / span 3; grid-row: 11 / span 8; }
+    .itemcheckout:nth-of-type(5)  { grid-column: 2 / span 3; grid-row: 20 / span 8; }
+    .itemcheckout:nth-of-type(6)  { grid-column: 6 / span 3; grid-row: 20 / span 8; }
+    .itemcheckout:nth-of-type(7)  { grid-column: 2 / span 3; grid-row: 29 / span 8; }
+    .itemcheckout:nth-of-type(8)  { grid-column: 6 / span 3; grid-row: 29 / span 8; }
+    .itemcheckout:nth-of-type(9)  { grid-column: 2 / span 3; grid-row: 38 / span 8; }
+    .itemcheckout:nth-of-type(10) { grid-column: 6 / span 3; grid-row: 38 / span 8; }
+    .itemcheckout:nth-of-type(11) { grid-column: 2 / span 3; grid-row: 47 / span 8; }
+    .itemcheckout:nth-of-type(12) { grid-column: 6 / span 3; grid-row: 47 / span 8; }
+    .itemcheckout:nth-of-type(13) { grid-column: 2 / span 3; grid-row: 56 / span 8; }
+    .itemcheckout:nth-of-type(14) { grid-column: 6 / span 3; grid-row: 56 / span 8; }
+    .itemcheckout:nth-of-type(15) { grid-column: 2 / span 3; grid-row: 65 / span 8; }
+    .itemcheckout:nth-of-type(16) { grid-column: 6 / span 3; grid-row: 65 / span 8; }
+    .itemcheckout:nth-of-type(17) { grid-column: 2 / span 3; grid-row: 74 / span 8; }
+    .itemcheckout:nth-of-type(18) { grid-column: 6 / span 3; grid-row: 74 / span 8; }
+    .itemcheckout:nth-of-type(19) { grid-column: 2 / span 3; grid-row: 83 / span 8; }
+    .itemcheckout:nth-of-type(20) { grid-column: 6 / span 3; grid-row: 83 / span 8; }
+    .itemcheckout:nth-of-type(21) { grid-column: 2 / span 3; grid-row: 92 / span 8; }
+    .itemcheckout:nth-of-type(22) { grid-column: 6 / span 3; grid-row: 92 / span 8; }
+    .itemcheckout:nth-of-type(23) { grid-column: 2 / span 3; grid-row: 101 / span 8; }
+    .itemcheckout:nth-of-type(24) { grid-column: 6 / span 3; grid-row: 101 / span 8; }
+    .itemcheckout:nth-of-type(25) { grid-column: 2 / span 3; grid-row: 110 / span 8; }
+    .itemcheckout:nth-of-type(26) { grid-column: 6 / span 3; grid-row: 110 / span 8; }
+    .itemcheckout:nth-of-type(27) { grid-column: 2 / span 3; grid-row: 119 / span 8; }
+    .itemcheckout:nth-of-type(28) { grid-column: 6 / span 3; grid-row: 119 / span 8; }
+    .itemcheckout:nth-of-type(29) { grid-column: 2 / span 3; grid-row: 128 / span 8; }
+    .itemcheckout:nth-of-type(30) { grid-column: 6 / span 3; grid-row: 128 / span 8; }
+    .itemcheckout:nth-of-type(31) { grid-column: 2 / span 3; grid-row: 137 / span 8; }
+    .itemcheckout:nth-of-type(32) { grid-column: 6 / span 3; grid-row: 137 / span 8; }
+    .itemcheckout:nth-of-type(33) { grid-column: 2 / span 3; grid-row: 146 / span 8; }
+    .itemcheckout:nth-of-type(34) { grid-column: 6 / span 3; grid-row: 146 / span 8; }
+    .itemcheckout:nth-of-type(35) { grid-column: 2 / span 3; grid-row: 155 / span 8; }
+    .itemcheckout:nth-of-type(36) { grid-column: 6 / span 3; grid-row: 155 / span 8; }
+    .itemcheckout:nth-of-type(37) { grid-column: 2 / span 3; grid-row: 164 / span 8; }
+    .itemcheckout:nth-of-type(38) { grid-column: 6 / span 3; grid-row: 164 / span 8; }
+    .itemcheckout:nth-of-type(39) { grid-column: 2 / span 3; grid-row: 173 / span 8; }
+    .itemcheckout:nth-of-type(40) { grid-column: 6 / span 3; grid-row: 173 / span 8; }
+  }
+  
+  /* 
+    Tablet range (max-width: 850px, min-width: 501px) 
+    - Single column in the middle 
+  */
+  @media (max-width: 850px) and (min-width: 501px) {
+    .itemcheckout:nth-of-type(1)  { grid-column: 3 / span 5; grid-row: 2 / span 8; }
+    .itemcheckout:nth-of-type(2)  { grid-column: 3 / span 5; grid-row: 11 / span 8; }
+    .itemcheckout:nth-of-type(3)  { grid-column: 3 / span 5; grid-row: 20 / span 8; }
+    .itemcheckout:nth-of-type(4)  { grid-column: 3 / span 5; grid-row: 29 / span 8; }
+    .itemcheckout:nth-of-type(5)  { grid-column: 3 / span 5; grid-row: 38 / span 8; }
+    .itemcheckout:nth-of-type(6)  { grid-column: 3 / span 5; grid-row: 47 / span 8; }
+    .itemcheckout:nth-of-type(7)  { grid-column: 3 / span 5; grid-row: 56 / span 8; }
+    .itemcheckout:nth-of-type(8)  { grid-column: 3 / span 5; grid-row: 65 / span 8; }
+    .itemcheckout:nth-of-type(9)  { grid-column: 3 / span 5; grid-row: 74 / span 8; }
+    .itemcheckout:nth-of-type(10) { grid-column: 3 / span 5; grid-row: 83 / span 8; }
+    .itemcheckout:nth-of-type(11) { grid-column: 3 / span 5; grid-row: 92 / span 8; }
+    .itemcheckout:nth-of-type(12) { grid-column: 3 / span 5; grid-row: 101 / span 8; }
+    .itemcheckout:nth-of-type(13) { grid-column: 3 / span 5; grid-row: 110 / span 8; }
+    .itemcheckout:nth-of-type(14) { grid-column: 3 / span 5; grid-row: 119 / span 8; }
+    .itemcheckout:nth-of-type(15) { grid-column: 3 / span 5; grid-row: 128 / span 8; }
+    .itemcheckout:nth-of-type(16) { grid-column: 3 / span 5; grid-row: 137 / span 8; }
+    .itemcheckout:nth-of-type(17) { grid-column: 3 / span 5; grid-row: 146 / span 8; }
+    .itemcheckout:nth-of-type(18) { grid-column: 3 / span 5; grid-row: 155 / span 8; }
+    .itemcheckout:nth-of-type(19) { grid-column: 3 / span 5; grid-row: 164 / span 8; }
+    .itemcheckout:nth-of-type(20) { grid-column: 3 / span 5; grid-row: 173 / span 8; }
+    .itemcheckout:nth-of-type(21) { grid-column: 3 / span 5; grid-row: 182 / span 8; }
+    .itemcheckout:nth-of-type(22) { grid-column: 3 / span 5; grid-row: 191 / span 8; }
+    .itemcheckout:nth-of-type(23) { grid-column: 3 / span 5; grid-row: 200 / span 8; }
+    .itemcheckout:nth-of-type(24) { grid-column: 3 / span 5; grid-row: 209 / span 8; }
+    .itemcheckout:nth-of-type(25) { grid-column: 3 / span 5; grid-row: 218 / span 8; }
+    .itemcheckout:nth-of-type(26) { grid-column: 3 / span 5; grid-row: 227 / span 8; }
+    .itemcheckout:nth-of-type(27) { grid-column: 3 / span 5; grid-row: 236 / span 8; }
+    .itemcheckout:nth-of-type(28) { grid-column: 3 / span 5; grid-row: 245 / span 8; }
+    .itemcheckout:nth-of-type(29) { grid-column: 3 / span 5; grid-row: 254 / span 8; }
+    .itemcheckout:nth-of-type(30) { grid-column: 3 / span 5; grid-row: 263 / span 8; }
+    .itemcheckout:nth-of-type(31) { grid-column: 3 / span 5; grid-row: 272 / span 8; }
+    .itemcheckout:nth-of-type(32) { grid-column: 3 / span 5; grid-row: 281 / span 8; }
+    .itemcheckout:nth-of-type(33) { grid-column: 3 / span 5; grid-row: 290 / span 8; }
+    .itemcheckout:nth-of-type(34) { grid-column: 3 / span 5; grid-row: 299 / span 8; }
+    .itemcheckout:nth-of-type(35) { grid-column: 3 / span 5; grid-row: 308 / span 8; }
+    .itemcheckout:nth-of-type(36) { grid-column: 3 / span 5; grid-row: 317 / span 8; }
+    .itemcheckout:nth-of-type(37) { grid-column: 3 / span 5; grid-row: 326 / span 8; }
+    .itemcheckout:nth-of-type(38) { grid-column: 3 / span 5; grid-row: 335 / span 8; }
+    .itemcheckout:nth-of-type(39) { grid-column: 3 / span 5; grid-row: 344 / span 8; }
+    .itemcheckout:nth-of-type(40) { grid-column: 3 / span 5; grid-row: 353 / span 8; }
+  }
+  
+  /* 
+    Mobile (max-width: 500px)
+    - Hides certain links and reflows everything 
+    - Single column layout 
+  */
+  @media (max-width: 500px) {
+    .shvslink {
+      display: none;
+    }
+  
+    .navlinks {
+      grid-template-columns: repeat(3, 1fr);
+      text-align: center;
+    }
+  
+    .placeholderlinks {
+      display: none;
+    }
+  
+    .secondarytitle {
+      margin-left: 15px;
+    }
+  
+    .maintitle {
+      margin-left: 15px;
+    }
+  
+    .equipcheckoutcont {
+      grid-column: span 12;
+      grid-row: span 10;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 62.5px;
+    }
+  
+    .itemcheckout {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: repeat(10, 1fr);
+    }
+  
+    /* 
+      Positions each checkout item in a single column spanning nearly full width 
+    */
+    .itemcheckout:nth-of-type(1)  { grid-column: 2 / span 10; grid-row: 2 / span 8;   }
+    .itemcheckout:nth-of-type(2)  { grid-column: 2 / span 10; grid-row: 11 / span 8;  }
+    .itemcheckout:nth-of-type(3)  { grid-column: 2 / span 10; grid-row: 20 / span 8;  }
+    .itemcheckout:nth-of-type(4)  { grid-column: 2 / span 10; grid-row: 29 / span 8;  }
+    .itemcheckout:nth-of-type(5)  { grid-column: 2 / span 10; grid-row: 38 / span 8;  }
+    .itemcheckout:nth-of-type(6)  { grid-column: 2 / span 10; grid-row: 47 / span 8;  }
+    .itemcheckout:nth-of-type(7)  { grid-column: 2 / span 10; grid-row: 56 / span 8;  }
+    .itemcheckout:nth-of-type(8)  { grid-column: 2 / span 10; grid-row: 65 / span 8;  }
+    .itemcheckout:nth-of-type(9)  { grid-column: 2 / span 10; grid-row: 74 / span 8;  }
+    .itemcheckout:nth-of-type(10) { grid-column: 2 / span 10; grid-row: 83 / span 8;  }
+    .itemcheckout:nth-of-type(11) { grid-column: 2 / span 10; grid-row: 92 / span 8;  }
+    .itemcheckout:nth-of-type(12) { grid-column: 2 / span 10; grid-row: 101 / span 8; }
+    .itemcheckout:nth-of-type(13) { grid-column: 2 / span 10; grid-row: 110 / span 8; }
+    .itemcheckout:nth-of-type(14) { grid-column: 2 / span 10; grid-row: 119 / span 8; }
+    .itemcheckout:nth-of-type(15) { grid-column: 2 / span 10; grid-row: 128 / span 8; }
+    .itemcheckout:nth-of-type(16) { grid-column: 2 / span 10; grid-row: 137 / span 8; }
+    .itemcheckout:nth-of-type(17) { grid-column: 2 / span 10; grid-row: 146 / span 8; }
+    .itemcheckout:nth-of-type(18) { grid-column: 2 / span 10; grid-row: 155 / span 8; }
+    .itemcheckout:nth-of-type(19) { grid-column: 2 / span 10; grid-row: 164 / span 8; }
+    .itemcheckout:nth-of-type(20) { grid-column: 2 / span 10; grid-row: 173 / span 8; }
+    .itemcheckout:nth-of-type(21) { grid-column: 2 / span 10; grid-row: 182 / span 8; }
+    .itemcheckout:nth-of-type(22) { grid-column: 2 / span 10; grid-row: 191 / span 8; }
+    .itemcheckout:nth-of-type(23) { grid-column: 2 / span 10; grid-row: 200 / span 8; }
+    .itemcheckout:nth-of-type(24) { grid-column: 2 / span 10; grid-row: 209 / span 8; }
+    .itemcheckout:nth-of-type(25) { grid-column: 2 / span 10; grid-row: 218 / span 8; }
+    .itemcheckout:nth-of-type(26) { grid-column: 2 / span 10; grid-row: 227 / span 8; }
+    .itemcheckout:nth-of-type(27) { grid-column: 2 / span 10; grid-row: 236 / span 8; }
+    .itemcheckout:nth-of-type(28) { grid-column: 2 / span 10; grid-row: 245 / span 8; }
+    .itemcheckout:nth-of-type(29) { grid-column: 2 / span 10; grid-row: 254 / span 8; }
+    .itemcheckout:nth-of-type(30) { grid-column: 2 / span 10; grid-row: 263 / span 8; }
+    .itemcheckout:nth-of-type(31) { grid-column: 2 / span 10; grid-row: 272 / span 8; }
+    .itemcheckout:nth-of-type(32) { grid-column: 2 / span 10; grid-row: 281 / span 8; }
+    .itemcheckout:nth-of-type(33) { grid-column: 2 / span 10; grid-row: 290 / span 8; }
+    .itemcheckout:nth-of-type(34) { grid-column: 2 / span 10; grid-row: 299 / span 8; }
+    .itemcheckout:nth-of-type(35) { grid-column: 2 / span 10; grid-row: 308 / span 8; }
+    .itemcheckout:nth-of-type(36) { grid-column: 2 / span 10; grid-row: 317 / span 8; }
+    .itemcheckout:nth-of-type(37) { grid-column: 2 / span 10; grid-row: 326 / span 8; }
+    .itemcheckout:nth-of-type(38) { grid-column: 2 / span 10; grid-row: 335 / span 8; }
+    .itemcheckout:nth-of-type(39) { grid-column: 2 / span 10; grid-row: 344 / span 8; }
+    .itemcheckout:nth-of-type(40) { grid-column: 2 / span 10; grid-row: 353 / span 8; }
+  }
+  
+  /* 
+    Layout inside each item:
+    - .itemimage1 handles the main product image
+  */
+  .itemimage1 {
     display: flex;
     grid-column: span 8;
     grid-row: span 6;
     align-self: center;
     justify-content: center;
-    
-}
-.image1
-{
+  }
+  
+  .image1 {
     width: 100%;
     height: auto;
     overflow: hidden;
-}
-.image2
-{
+  }
+  
+  .image2 {
     width: 75%;
     height: auto;
     overflow: hidden; 
-}
-.itembanner1
-{
+  }
+  
+  /* 
+    Banner-like area in the bottom portion of the item.
+    - Rounded corners for a "blob" design 
+  */
+  .itembanner1 {
     text-align: center;
     grid-column: span 8;
     grid-row: span 4;
     width: auto;
     height: auto;
     background-color: #ec8a29;
-    border-radius: 98% 66% 63% 0% / 43% 72% 0% 10% ;
+    border-radius: 98% 66% 63% 0% / 43% 72% 0% 10%;
     padding-top: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-.itemtitle1
-{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+                0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  
+  .itemtitle1 {
     margin-left: 7px;
     align-self: center;
     margin-bottom: 20px;
     grid-column: span 2;
     grid-row: span 4;
-}
-p
-{
+  }
+  
+  /* 
+    Basic typography 
+  */
+  p {
     margin: 0;
     font-family: "Noto Sans", sans-serif;
-    
-}
-h3
-{
+  }
+  
+  h3, h4 {
     margin-bottom: 5px;
     font-family: "Noto Sans", sans-serif;
     font-weight: bold;
-}
-h4
-{
-    margin-bottom: 5px;
+  }
+  
+  h2 {
     font-family: "Noto Sans", sans-serif;
     font-weight: bold;
-}
-h2
-{
-    font-family: "Noto Sans", sans-serif;
-    font-weight: bold;
-}
-.itembutton1
-{
+  }
+  
+  /* 
+    Button container in the item 
+  */
+  .itembutton1 {
     grid-column: span 2;
     grid-row: span 4;
     place-self: center;
-
-}
-.addtocart1
-{
+  }
+  
+  .addtocart1 {
     font-size: 50px;
     color: black;
-}
-.iteminfocont
-{
+  }
+  
+  /* 
+    Another grid for item info 
+    - Uses a semi-transparent background with blur. 
+  */
+  .iteminfocont {
     justify-content: center;
     display: grid;
     grid-template-columns: repeat(10, 50px);
     grid-template-rows: repeat(10, 60px);
-}
-.itembox
-{
+  }
+  
+  .itembox {
     grid-column: span 10;
     grid-row: span 10;
     background: rgba(255, 255, 255, 0.11);
@@ -680,54 +757,65 @@ h2
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(6, 1fr);
-}
-.itemtitle
-{
+  }
+  
+  .itemtitle {
     z-index: 2;
     margin-left: 15px;
     align-self: center;
     grid-column: span 6;
-}
-.nomargitopbottom
-{
+  }
+  
+  .nomargitopbottom {
     margin-top: 5px;
     margin-bottom: 0;
-}
-.itemtextbox
-{
+  }
+  
+  .itemtextbox {
     grid-column: 2 / span 4;
     grid-row: span 10;
-}
-.itemdescription
-{
+  }
+  
+  .itemdescription {
     margin-left: 15px;
-}
-.checkoutbutton
-{
+  }
+  
+  /* 
+    Checkout button at the bottom-right 
+    with custom border radius shape 
+  */
+  .checkoutbutton {
     z-index: 3;
     height: 75px;
     width: 250px;
-    border-radius: 37% 63% 18% 82% / 70% 50% 50% 30%  ;
+    border-radius: 37% 63% 18% 82% / 70% 50% 50% 30%;
     background-color: #ec8a29;
     align-self: center;
     text-align: center;
     position: absolute;
     bottom: 0;
     right: 55px;
-}
-.checkoutbutton:hover
-{
+  }
+  
+  .checkoutbutton:hover {
     background-color: #e06f26;
     transition: background-color 0.5s 100ms;
-}
-.email, .name
-{
+  }
+  
+  /* 
+    Simple styling for text fields 
+  */
+  .email, .name {
     padding: 12px;
-    box-shadow: #000;
+    box-shadow: #000;  /* Possibly incomplete property; might need e.g. box-shadow: 0 0 5px #000; */
     border-radius: 10px;
-}
-.dropbtn
-{
+  }
+  
+  /* 
+    Dropdown menu button 
+    - border-radius is also a kind of "blob" shape 
+  */
+  .dropbtn {
     z-index: 1000;
     border-radius: 61% 39% 82% 18% / 70% 64% 36% 30%;
     background-color: #ec8a29;
@@ -736,15 +824,22 @@ h2
     font-size: 16px;
     border: none;
     cursor: pointer;
-}
-.dropdown
-{
+  }
+  
+  /* 
+    Overall dropdown container 
+  */
+  .dropdown {
     z-index: 1000;
     position: relative;
     display: inline-block;
-}
-.dropdown-content
-{
+  }
+  
+  /* 
+    The actual dropdown menu, hidden by default 
+    - Appears on hover 
+  */
+  .dropdown-content {
     z-index: 1000;
     display: none;
     position: absolute;
@@ -755,9 +850,9 @@ h2
     min-width: 300px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     grid-template-columns: repeat(9, 40px);
-}
-.dropdown-option
-{
+  }
+  
+  .dropdown-option {
     z-index: 1000;
     color: black;
     padding: 5px;
@@ -767,41 +862,47 @@ h2
     display: flex;
     align-items: center;
     justify-content: center;
-}
-.dropdown-option:hover 
-{
+  }
+  
+  .dropdown-option:hover {
     background-color: #f1f1f1;
-}
-.dropdown:hover .dropdown-content
-{
+  }
+  
+  /* 
+    On hover, show the menu content 
+  */
+  .dropdown:hover .dropdown-content {
     display: grid;
-}
-form
-{
+  }
+  
+  form {
     font-family: "Noto Sans", sans-serif;
-}
-.bgcolorgray
-{
+  }
+  
+  .bgcolorgray {
     background-color: gray;
-}
-.nohover
-{
+  }
+  
+  .nohover {
     cursor: not-allowed;
-}
-.hover
-{
+  }
+  
+  .hover {
     cursor: pointer;
-}
-.nohover1
-{
+  }
+  
+  .nohover1 {
     cursor: not-allowed;
-}
-.nohover1:hover
-{
+  }
+  
+  .nohover1:hover {
     background-color: gray;
-}
-.close
-{
+  }
+  
+  /* 
+    Close button for popups, positioned in the top-right 
+  */
+  .close {
     position: absolute;
     display: flex;
     place-content: right;
@@ -813,116 +914,154 @@ form
     text-align: center;
     font-family: "Noto Sans", sans-serif;
     font-size: 45px;
-}
+  }
+/* 
+  .popup 
+  Used for displaying a full-screen popup overlay with semi-transparent background.
+  The 'display' property is set to 'block' here, but often you might dynamically 
+  toggle 'display: none' or use '.hide' for actual hiding via JavaScript.
+*/
 .popup {
-    display: block; /* Hidden by default */
+    display: block; /* By default, it's shown - though "Hidden by default" in the comment implies it might be toggled */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(73, 55, 55, 0.5); /* Semi-transparent background */
-    z-index: 1;
+    background-color: rgba(73, 55, 55, 0.5); /* Semi-transparent background overlay */
+    z-index: 1; /* Ensures the popup stays on top of other elements */
   }
   
-  /* Popup content */
+  /* 
+    .popup-content 
+    Centers its content (usually the modal or message) horizontally and vertically.
+  */
   .popup-content {
-    margin: 5% auto; /* Centered vertically and horizontally */
+    margin: 5% auto; /* 5% top margin, auto left/right for centering */
     text-align: center;
   }
   
+  /* 
+    .close:hover, .close:focus 
+    Styles for the close button when hovered or focused.
+  */
   .close:hover,
   .close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
   }
-  /* Grid container inside the popup */
+  
+  /* 
+    .popup-grid 
+    A grid inside the popup, potentially used for layout of items/elements in the popup.
+    Here it is configured with 6 columns and 6 rows, each row having 100px height.
+  */
   .popup-grid {
     display: grid;
-    grid-template-columns: repeat(6, 1fr); /* Three equal columns */
+    grid-template-columns: repeat(6, 1fr); /* 6 columns, each 1 fraction of the total width */
     grid-template-rows: repeat(6, 100px);
   }
-.hide
-{
+  
+  /* 
+    .hide 
+    Utility class to hide an element (e.g., to hide .popup by toggling classes).
+  */
+  .hide {
     display: none;
-}
-.i
-{
+  }
+  
+  /* 
+    .i 
+    An example styling for a box (or placeholder) with a fixed size and a border.
+  */
+  .i {
     width: 100px;
     height: 100px;
     background: white;
     border: black 3px;
-}
-
-.loader{
-    margin: 0 0 2em;
-    height: 100px;
-    width: 20%;
-    text-align: center;
-    padding: 1em;
-    margin: 0 auto 1em;
-    display: inline-block;
-    vertical-align: top;
-    grid-column: 1 / -1;
-    grid-row: span 1;
-    justify-content: center;
-
   }
   
-  /*
-    Set the color of the icon
+  /* 
+    .loader 
+    A container for a loading animation/icon, sized at 20% width, centered, 
+    and aligned to the grid or inline context. 
   */
+  .loader {
+    margin: 0 0 2em;       /* Top/Bottom margin of 0 and 2em, respectively */
+    height: 100px;
+    width: 20%;            /* Relative width of the container */
+    text-align: center;
+    padding: 1em;
+    margin: 0 auto 1em;    /* Centered horizontally with an additional bottom margin */
+    display: inline-block;
+    vertical-align: top;   /* Aligns it at the top in inline-block context */
+    grid-column: 1 / -1;   /* Spans all columns if used within a grid container */
+    grid-row: span 1;      /* Spans 1 row in a grid container */
+    justify-content: center;
+  }
+  
   svg path,
-  svg rect{
+  svg rect {
     fill: snow;
   }
+  
+  /* 
+    .slide-up 
+    Initially hidden (opacity: 0), then animates upward into view with the @keyframes below.
+  */
   .slide-up {
     position: relative;
-    opacity: 0; /* Make it invisible initially */
-    animation: slideUp 1s ease-out forwards; /* Animation to slide up */
+    opacity: 0;                 /* Invisible initially */
+    animation: slideUp 1s ease-out forwards; /* Slide up over 1 second */
   }
-
-  /* Keyframes for sliding up */
+  
   @keyframes slideUp {
     0% {
-      transform: translateY(100vh); /* Start from below the screen */
+      transform: translateY(100vh); /* Start from below the visible area */
       opacity: 0;
     }
     100% {
-      transform: translateY(0); /* End at the normal position */
-      opacity: 1; /* Fully visible */
+      transform: translateY(0);     /* End in original position */
+      opacity: 1;                   /* Fully visible */
     }
-}
-.hidden
-{
+  }
+
+  .hidden {
     opacity: 0;
     transition: all 1s;
-}
-.show
-{
+  }
+  .show {
     opacity: 1;
-}
-.shake:hover
-{
+  }
+  
+  /* 
+    .shake:hover 
+    Trigger a continuous "shake" animation when hovered.
+  */
+  .shake:hover {
     animation: shake 0.9s infinite alternate;
-}
-@keyframes shake
-{
-0% { transform: translateX(0) }
-  25% { transform: translateY(-9px) }
-  35% { transform: translateY(-9px) rotate(10deg) }
-  55% { transform: translateY(-9px) rotate(-10deg) }
-  65% { transform: translateY(-9px) rotate(10deg) }
-  75% { transform: translateY(-9px) rotate(-10deg) }
-  100% { transform: translateY(0) rotate(0) }
-}
-.aboutpagecont
-{
-    grid-column: 2 / span 10;
-    grid-row: span 8;
-    background: rgba(255, 255, 255, 0.11);
-    backdrop-filter: blur(50px);
+  }
+  
+  /*
+    @keyframes shake 
+    Defines the shaking animation steps with translations and minor rotations.
+  */
+  @keyframes shake {
+    0%   { transform: translateX(0); }
+    25%  { transform: translateY(-9px); }
+    35%  { transform: translateY(-9px) rotate(10deg); }
+    55%  { transform: translateY(-9px) rotate(-10deg); }
+    65%  { transform: translateY(-9px) rotate(10deg); }
+    75%  { transform: translateY(-9px) rotate(-10deg); }
+    100% { transform: translateY(0) rotate(0); }
+  }
+  
+  .aboutpagecont {
+    grid-column: 2 / span 10;              /* Spans columns 2 through 11 in a grid container */
+    grid-row: span 8;                      /* Spans 8 rows */
+    background: rgba(255, 255, 255, 0.11); /* Slight translucent overlay */
+    backdrop-filter: blur(50px);           /* Blurred background behind element (browser support required) */
     border: 3px solid rgba(255, 255, 255, 0.3);
     display: flex;
     flex-direction: column;
@@ -930,29 +1069,38 @@ form
     padding-left: 25px;
     padding-right: 25px;
     padding-bottom: 25px;
-    overflow: scroll;
-}
-ul
-{
+    overflow: scroll; /* Allows scrolling within this container */
+  }
+  
+  ul {
     align-self: center;
     text-align: left;
-}
-li
-{
-padding-bottom: 5px ;
-}
-.aboutpage
-{
+  }
+  
+  li {
+    padding-bottom: 5px;
+  }
+  
+  /* 
+    .aboutpage 
+    Styled text with a hover effect that scales up slightly and changes color.
+  */
+  .aboutpage {
     margin: 0;
     transition: transform 0.4s cubic-bezier(0.75, 2, 0.75, 1);
-    color: #f47e2b;
-}
-.aboutpage:hover
-{
+    color: #f47e2b; /* Orange color */
+  }
+  
+  .aboutpage:hover {
     transform: scale(1.2);
-    color: #FFD700;
-}
-.nomargin
-{
+    color: #FFD700; /* Gold color when hovered */
+  }
+  
+  /* 
+    .nomargin 
+    Utility class to remove margin from an element.
+  */
+  .nomargin {
     margin: 0;
-}
+  }
+  

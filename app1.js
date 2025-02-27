@@ -1,329 +1,307 @@
+// References to popup form fields
 let formtitle = document.getElementById('formtitle');
 let formcategory = document.getElementById('formcategory');
 let formdescription = document.getElementById('formdescription');
 let formitempic = document.getElementById('formitempic');
 
-
 let selectedEquipment;
 
-
-
-
-
+// Sheety API endpoint
 let url = 'https://api.sheety.co/8ec23e810fa3efa81389bcea9a3c14a5/checkoutInventory/sheet1';
+
+// Fetch initial data from Sheety
 fetch(url)
-.then((response) => response.json())
-.then(json => {
-    // Access the correct property based on the JSON structure
-    const sheetData = json.sheet1; // Adjust this line after inspecting the JSON structure
-    
+  .then((response) => response.json())
+  .then((json) => {
+    const sheetData = json.sheet1; // Adjust this based on the actual JSON structure, if needed
+
     if (sheetData) {
-        let loader = document.getElementById('loader');
-        loader.remove();
-        const container = document.querySelector('.equipcheckoutcont');
-        // Loop through the JSON data and write HTML elements
-        for (let i = 0; i < sheetData.length; i++) {
-            const card = sheetData[i];
-            if (card.category === "Camera")
-            {
-                
+      // Remove the loader element once data is retrieved
+      let loader = document.getElementById('loader');
+      loader.remove();
 
-                // html in javascript starts
-                // create div
-            const box = document.createElement('div'); 
-            // create classes for div
-            box.classList.add('itemcheckout', 'slide-up');
+      const container = document.querySelector('.equipcheckoutcont');
 
-            let num = Math.floor(Math.random() * 3) + 1;
+      // Loop through the data and create item cards for those with category "Camera"
+      for (let i = 0; i < sheetData.length; i++) {
+        const card = sheetData[i];
 
-            if (num === 1) {
-                box.classList.add('blob1')
-            } else if (num === 2) {
-                box.classList.add('blob2')
-            } else {
-                box.classList.add('blob3')
-            }
+        if (card.category === "Camera") {
+          // Create a container for each item
+          const box = document.createElement('div');
+          box.classList.add('itemcheckout', 'slide-up');
 
+          // Randomly assign a 'blob' class for different shapes
+          let num = Math.floor(Math.random() * 3) + 1;
+          if (num === 1) {
+            box.classList.add('blob1');
+          } else if (num === 2) {
+            box.classList.add('blob2');
+          } else {
+            box.classList.add('blob3');
+          }
 
-            // itemimage div
-                const itemimage = document.createElement('div');
-                itemimage.classList.add('itemimage1');
+          // Create a div for the item image
+          const itemimage = document.createElement('div');
+          itemimage.classList.add('itemimage1');
 
-                //  item image creation
-                    const image = document.createElement('img');
-                    image.classList.add('image1');
-                    image.src = card.image;
-                    // puts the image inside the itemimage
-                    itemimage.appendChild(image);
+          // The actual img element for the item
+          const image = document.createElement('img');
+          image.classList.add('image1');
+          image.src = card.image;
+          itemimage.appendChild(image);
+          box.appendChild(itemimage);
 
-                    // puts the itemimage inside the box
-                box.appendChild(itemimage);
+          // Create the banner portion
+          const bannercont = document.createElement('div');
+          bannercont.classList.add('itembanner1');
 
-                // create item banner div
-                const bannercont = document.createElement('div');
-                bannercont.classList.add('itembanner1');
+          // Title and details within the banner
+          const itemtitlediv = document.createElement('div');
+          itemtitlediv.classList.add('itemtitle1');
 
-                // adding item title div
-                    const itemtitlediv = document.createElement('div');
-                    itemtitlediv.classList.add('itemtitle1');
+          const itemtitle = document.createElement('h3');
+          itemtitle.innerText = card.equipmentItem;
 
-                        // creating responsive titles
-                        const itemtitle = document.createElement('h3');
-                        itemtitle.innerText = card.equipmentItem;
+          const itemdetails = document.createElement('p');
+          itemdetails.innerText = card.details;
 
-                        const itemdetails = document.createElement('p');
-                        itemdetails.innerText = card.details;
+          itemtitlediv.appendChild(itemtitle);
+          itemtitlediv.appendChild(itemdetails);
+          bannercont.appendChild(itemtitlediv);
 
-                    // puts item title inside the itemtitlediv
-                    itemtitlediv.appendChild(itemtitle);
-                    // puts the item details inside the item details
-                    itemtitlediv.appendChild(itemdetails);
-                    // puts the itemtitlediv inside the banner cont
-                    bannercont.appendChild(itemtitlediv);
+          // Container for the checkout button
+          const itembutton = document.createElement('div');
+          itembutton.classList.add('itembutton1');
 
-                    // creating the button div
-                    const itembutton = document.createElement('div');
-                    itembutton.classList.add('itembutton1');
+          // The button itself
+          let addtocart = document.createElement('button');
+          addtocart.id = card.number;
+          addtocart.classList.add('addtocart1', 'shake');
+          addtocart.addEventListener('click', function () {
+            openPopup();
+          });
 
-                    // creating the checkout link
-                    let addtocart = document.createElement('button');
-                    addtocart.id = card.number;
-                    addtocart.classList.add('addtocart1', 'shake');
-                    addtocart.addEventListener('click', function(){openPopup()}); // Attach the function as a click event listener
-                
+          // The cart icon
+          const carticon = document.createElement('i');
+          carticon.classList.add('fa-solid', 'fa-cart-plus', 'addtocart1', 'hover', 'shake');
 
-                            const carticon = document.createElement('i');
-                            carticon.classList.add('fa-solid', 'fa-cart-plus', 'addtocart1', 'hover', 'shake');
+          // If the item is already checked out, disable hover effects and gray out
+          if (card.checkedOut === true) {
+            bannercont.classList.add('bgcolorgray');
+            carticon.classList.remove('hover', 'shake');
+            carticon.classList.add('nohover');
+          }
 
-                            if (card.checkedOut === true)
-                            {
-                                bannercont.classList.add('bgcolorgray');
-                                carticon.classList.remove('hover', 'shake')
-                                carticon.classList.add('nohover')
-                            }
+          addtocart.appendChild(carticon);
+          itembutton.appendChild(addtocart);
+          bannercont.appendChild(itembutton);
 
+          // Append the banner to the box
+          box.appendChild(bannercont);
 
-                            // adding the carticon into addtocart
-                            addtocart.appendChild(carticon);
-                        // putting addtocart inside the itembutton
-                        itembutton.appendChild(addtocart);
-                        // putting the itembutton inside the bannercont
-                    bannercont.appendChild(itembutton);
-                    // putting the bannercont inside the box (main container)
-                box.appendChild(bannercont);
-                // puts the entire javascript inside the container, in this case it would be equipmentcheckoutcont
-            container.appendChild(box);
-            }
-            // Create HTML elements for the content
-
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
-                function openPopup() {
-                if (card.checkedOut !== true)
-                {
-                    const popupContent = document.getElementById('popup');
-                        popupContent.classList.remove('hide');
-                
-                let url = 'https://api.sheety.co/8ec23e810fa3efa81389bcea9a3c14a5/checkoutInventory/sheet1';
-                        fetch(url)
-                        .then((response) => response.json())
-                        .then(json => {
-                            const sheetData = json.sheet1; // Access the data array
-
-
-                            // Loop through the data to find "Camera Kit 1"
-
-                            let addtocart = document.createElement('button');
-                            addtocart.id = card.number;
-                            console.log(card.number)
-
-                            const selectedCard = sheetData.find(item => item.number == addtocart.id);
-        
-                            if (selectedCard) {
-                                // Update the form with the selected card's details
-                                document.getElementById('formtitle').textContent = selectedCard.equipmentItem;
-                                document.getElementById('formcategory').textContent = selectedCard.category;
-                                document.getElementById('formdescription').textContent = selectedCard.moreDetails;
-                                document.getElementById('formitempic').src = selectedCard.image;
-                            } else {
-                                console.error('Card data not found!');
-                            }
-
-                        })
-                        .catch(error => console.error('Error:', error)); // Handle any errors
-                    } 
-                // Get selected SD card value and store it in a hidden input field
-                const dropdownOptions = document.querySelectorAll('.dropdown-option');
-                const displaySelection = document.getElementById('display-selection');
-                const selectedSDCardInput = document.getElementById('selectedSDCard');
-                
-                // ;mpadnsoibuyvagcAUISq0   -erduocfghidueojpk0rt-ihdgufytckvuihojp0iu9y8ftdrxdhzfsdhxtryfugiho8[u9-y8t76ri5eystehrjdyfkugiho8pu9i0uy87tfu6drsewDSZestdrf67y8oup9iu8oy7t6d54jsteharwhestjdyfliy7;o8u'i9876tfdryestawrbetdyfi7;o8u'i9u8y7t6fdresjhwestdrf7y8u90-8y7t6rsewgrehtd678y9u-i]09uy8t76rstezGSZehtdyfg890ui-=u9y8t76drsezSGErd67t8yu9709t8r6e5jstehartsdy789y07-89t76r5ysteharhstj6t78y970-70tr65eysrthasrd5y6rt789y708-079t6
-                    dropdownOptions.forEach(option => {
-                        option.addEventListener('click', () => {
-                            const selectedValue = option.getAttribute('data-value');
-                            displaySelection.textContent = `You selected: ${selectedValue}`;
-                            selectedSDCardInput.value = selectedValue; // Store the selected value in the hidden input
-                        });
-                    });
-            }
-                
-
-            
-
+          // Finally, add the entire item box to the main container
+          container.appendChild(box);
         }
+
+        // ---------------------------------------------------------
+        // Function to open the popup for the clicked item
+        // ---------------------------------------------------------
+        function openPopup() {
+          // Only open if the item is not checked out
+          if (card.checkedOut !== true) {
+            const popupContent = document.getElementById('popup');
+            popupContent.classList.remove('hide');
+
+            // Fetch again to ensure we have the latest data (could be optimized)
+            fetch(url)
+              .then((response) => response.json())
+              .then((json) => {
+                const sheetData = json.sheet1;
+
+                // Use a dummy button ID to locate the correct card
+                let addtocart = document.createElement('button');
+                addtocart.id = card.number;
+                console.log(card.number);
+
+                const selectedCard = sheetData.find(item => item.number == addtocart.id);
+
+                if (selectedCard) {
+                  // Update the form/popup with the selected card's info
+                  document.getElementById('formtitle').textContent = selectedCard.equipmentItem;
+                  document.getElementById('formcategory').textContent = selectedCard.category;
+                  document.getElementById('formdescription').textContent = selectedCard.moreDetails;
+                  document.getElementById('formitempic').src = selectedCard.image;
+                } else {
+                  console.error('Card data not found!');
+                }
+              })
+              .catch(error => console.error('Error:', error));
+          }
+
+          // Handle SD Card dropdown selection inside the popup
+          const dropdownOptions = document.querySelectorAll('.dropdown-option');
+          const displaySelection = document.getElementById('display-selection');
+          const selectedSDCardInput = document.getElementById('selectedSDCard');
+
+          dropdownOptions.forEach(option => {
+            option.addEventListener('click', () => {
+              const selectedValue = option.getAttribute('data-value');
+              displaySelection.textContent = `You selected: ${selectedValue}`;
+              selectedSDCardInput.value = selectedValue; // Store the selected SD card in a hidden input
+            });
+          });
+        }
+      }
     } else {
-        console.error('sheet1 property is undefined');
-        alert('Ran out of free sheetly uses. Please see Mr. Vogel.')
+      console.error('sheet1 property is undefined');
+      alert('Ran out of free sheetly uses. Please see Mr. Vogel.');
     }
-})
-.catch(error => console.error('Error:', error)); // Optional: Add error handling
+  })
+  .catch(error => console.error('Error:', error)); // Catch any fetch errors
 
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
+// ---------------------------------------------------------
+// Close the popup
+// ---------------------------------------------------------
 function closePopup() {
-    const popupContent = document.getElementById('popup');
-        popupContent.classList.add('hide');
+  const popupContent = document.getElementById('popup');
+  popupContent.classList.add('hide');
 }
 
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-
+// ---------------------------------------------------------
+// Set up the dropdown for SD cards (if any)
+// ---------------------------------------------------------
 const dropdownOptions = document.querySelectorAll('.dropdown-option');
 const displaySelection = document.getElementById('display-selection');
 const selectedSDCardInput = document.getElementById('selectedSDCard');
 
-        fetch(url)
-        .then((response) => response.json())
-         .then(json => {
-            const sheetData = json.sheet1; // Access the data array
+// Fetch the data again to populate SD card dropdown options
+fetch(url)
+  .then((response) => response.json())
+  .then((json) => {
+    const sheetData = json.sheet1; // Access the data array
 
-            // Loop through the data to find "Camera Kit 1"
-            for (let i = 0; i < sheetData.length; i++) {
-                const card = sheetData[i]; // Access each item
-                
-                if (card.category === "SD Card") { // Check if it's "Camera Kit 1"
-                    let dropdownholder = document.getElementById('dropdownholder')
-                    let dropdowndiv = document.createElement('div')
+    // Find items whose category is "SD Card" and add to dropdown
+    for (let i = 0; i < sheetData.length; i++) {
+      const card = sheetData[i];
 
-                    dropdowndiv.classList.add('dropdown-option')
-                    dropdowndiv.setAttribute('data-value', card.equipmentItem)
+      if (card.category === "SD Card") {
+        let dropdownholder = document.getElementById('dropdownholder');
+        let dropdowndiv = document.createElement('div');
 
-                    dropdownholder.appendChild(dropdowndiv)
+        dropdowndiv.classList.add('dropdown-option');
+        dropdowndiv.setAttribute('data-value', card.equipmentItem);
 
-                    let dropdowndivtxt = document.createElement('p')
-                    dropdowndivtxt.innerHTML = card.equipmentItem;
+        dropdownholder.appendChild(dropdowndiv);
 
-                    dropdowndiv.appendChild(dropdowndivtxt);
+        let dropdowndivtxt = document.createElement('p');
+        dropdowndivtxt.innerHTML = card.equipmentItem;
+        dropdowndiv.appendChild(dropdowndivtxt);
 
-                    if (card.checkedOut === true)
-                    {
-                        dropdowndiv.classList.add('nohover1', 'bgcolorgray')
-                        dropdowndiv.removeAttribute('data-value', card.equipmentItem)
-                    }
+        // If already checked out, disable selection
+        if (card.checkedOut === true) {
+          dropdowndiv.classList.add('nohover1', 'bgcolorgray');
+          dropdowndiv.removeAttribute('data-value', card.equipmentItem);
+        }
+      }
+    }
+  })
+  .catch(error => console.error('Error:', error)); // Handle any errors
 
-                }
-            }
-        })
-        .catch(error => console.error('Error:', error)); // Handle any errors
-
-
-
-
-
-
-
+// ---------------------------------------------------------
+// validateCheckout - validation & update Sheety data
+// ---------------------------------------------------------
 function validateCheckout() {
-    // Get user inputs
-    const email = document.getElementById("email").value.trim();
-    const name = document.getElementById("name").value.trim();
-    const selectedSDCard = selectedSDCardInput.value;
+  // Grab user inputs from the popup form
+  const email = document.getElementById("email").value.trim();
+  const name = document.getElementById("name").value.trim();
+  const selectedSDCard = selectedSDCardInput.value;
 
-    // Simple email validation regex
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // Simple regex for validating email format
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    // Validate inputs
-    if (!email || !emailRegex.test(email)) {
-        alert("Please enter a valid email address.");
-        return;
-    }
+  // Validate inputs
+  if (!email || !emailRegex.test(email)) {
+    alert("Please enter a valid email address.");
+    return;
+  }
+  if (!name) {
+    alert("Please enter your name.");
+    return;
+  }
+  if (!selectedSDCard) {
+    alert("Please select an SD card.");
+    return;
+  }
 
-    if (!name) {
-        alert("Please enter your name.");
-        return;
-    }
+  // If validations pass
+  alert("Checkout successful!");
 
-    if (!selectedSDCard) {
-        alert("Please select an SD card.");
-        return;
-    }
+  const url = 'https://api.sheety.co/8ec23e810fa3efa81389bcea9a3c14a5/checkoutInventory/sheet1';
 
-    // Proceed with the checkout process if all validations pass
-    alert("Checkout successful!");
+  // Fetch the full data again to update the selected camera kit & SD card
+  fetch(url)
+    .then(response => response.json())
+    .then(json => {
+      const sheetData = json.sheet1;
 
-    const url = 'https://api.sheety.co/8ec23e810fa3efa81389bcea9a3c14a5/checkoutInventory/sheet1';
+      // Identify the selected SD card and the camera kit from the popup formtitle
+      const selectedCardEntry = sheetData.find(item => item.equipmentItem === selectedSDCard);
+      const camerakit = sheetData.find(item => item.equipmentItem === formtitle.innerHTML);
 
-    // Fetch inventory data to find the selected SD card and Camera Kit 1
-    fetch(url)
-        .then(response => response.json())
-        .then(json => {
-            const sheetData = json.sheet1;
-    
-            // Find the selected SD card and Camera Kit 1
+      // Function to update an item's "checkedOut" status
+      const updateItem = (item, checkedOutName, checkedOutEmail) => {
+        if (!item) {
+          console.error('Item not found');
+          return;
+        }
 
-            const selectedCardEntry = sheetData.find(item => item.equipmentItem === selectedSDCard);
-            const camerakit = sheetData.find(item => item.equipmentItem === formtitle.innerHTML);
+        const updateUrl = `https://api.sheety.co/8ec23e810fa3efa81389bcea9a3c14a5/checkoutInventory/sheet1/${item.id}`;
 
-    
-            // Function to update item status
-            const updateItem = (item, checkedOutName, checkedOutEmail) => {
-                if (!item) {
-                    console.error('Item not found');
-                    return;
-                }
-    
-                const updateUrl = `https://api.sheety.co/8ec23e810fa3efa81389bcea9a3c14a5/checkoutInventory/sheet1/${item.id}`;
-    
-                fetch(updateUrl, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        sheet1: {
-                            checkedOut: true,
-                            checkedOutName,
-                            checkedOutEmail,
-                            equipmentItem: item.equipmentItem
-                        }
-                    })
-                })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`Failed to update item ${item.equipmentItem}. HTTP status: ${response.status}`);
-                        }
-                        return response.json();
-                    })
-                    .then(updatedData => {
-                        console.log(`${item.equipmentItem} updated successfully:`, updatedData);
-                    })
-                    .catch(error => console.error(`Error updating ${item.equipmentItem}:`, error));
-            };
-    
-            // Update selected SD card and Camera Kit 1 if found
-            updateItem(selectedCardEntry, name, email);
-            updateItem(camerakit, name, email);
+        fetch(updateUrl, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            sheet1: {
+              checkedOut: true,
+              checkedOutName,
+              checkedOutEmail,
+              equipmentItem: item.equipmentItem
+            }
+          })
         })
-        .catch(error => console.error('Error fetching data:', error));
-    
-}
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entries) => {
-        console.log(entries)
-        if (entries.isIntersecting) {
-            entry.target.classList.add('show');
-        }
-        else{
-            entry.target.classList.remove('show')
-        }
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`Failed to update item ${item.equipmentItem}. HTTP status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then(updatedData => {
+            console.log(`${item.equipmentItem} updated successfully:`, updatedData);
+          })
+          .catch(error => console.error(`Error updating ${item.equipmentItem}:`, error));
+      };
+
+      // Update both the SD card and the camera kit (if they exist)
+      updateItem(selectedCardEntry, name, email);
+      updateItem(camerakit, name, email);
     })
-})
+    .catch(error => console.error('Error fetching data:', error));
+}
+
+// ---------------------------------------------------------
+// Intersection Observer to reveal items on scroll
+// ---------------------------------------------------------
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    console.log(entry);
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+    } else {
+      entry.target.classList.remove('show');
+    }
+  });
+});
 
 const scrollanimation = document.querySelectorAll('.itemcheckout');
-scrollanimation.forEach((el) => observer.observe(el))
+scrollanimation.forEach((el) => observer.observe(el));
